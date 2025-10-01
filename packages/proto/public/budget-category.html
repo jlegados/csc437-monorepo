@@ -1,20 +1,88 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Budget Category — Groceries</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Budget Category</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › <a href="./budget.html">Budget</a> › Budget Category
-  </nav>
+  <main class="container">
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a class="active" href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
 
-  <h1>Budget Category: Groceries</h1>
-  <p><strong>Planned:</strong> $350 · <strong>Spent:</strong> $272.41 · <strong>Remaining:</strong> $77.59</p>
-  
-  <h2>Related</h2>
-  <ul>
-    <li>Appears in <a href="./budget.html">Budget — Sep 2025</a></li>
-    <li>Mapped to <a href="./transaction-category.html">Transaction Category — Groceries</a></li>
-  </ul>
+    <section class="grid stretch">
+      <a href="./category.html" class="crumb">← Back to Categories</a>
+
+      <header class="row">
+        <h1 id="bcat-name">Groceries</h1>
+        <div class="row" style="gap:8px">
+          <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
+          <strong id="bcat-month">September 2025</strong>
+          <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
+        </div>
+      </header>
+
+      <section class="card span-3">
+        <div class="row" style="align-items:flex-end">
+          <div><div class="muted">Planned</div><div id="bcat-planned" class="kpi-value">$350.00</div></div>
+          <div><div class="muted">Actual (to date)</div><div id="bcat-actual" class="kpi-value">$350.00</div></div>
+          <div><div class="muted">Remaining</div><div id="bcat-remaining" class="kpi-value">$0.00</div></div>
+          <a class="btn btn-accent" href="./transaction.html">＋ Add Transaction</a>
+        </div>
+        <div style="margin-top:10px">
+          <progress id="bcat-progress" value="350" max="350" title="100%"></progress>
+          <div class="hint" id="bcat-progress-hint">100% used</div>
+        </div>
+      </section>
+
+      <section class="card span-3">
+        <h2>Edit Category Plan</h2>
+        <form class="row" id="bcat-edit">
+          <label>Planned amount
+            <input name="planned" type="number" step="0.01" value="350.00" />
+          </label>
+          <button class="btn">Save</button>
+        </form>
+        <p class="hint">Changing the plan doesn’t change past spending.</p>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Transactions in Groceries</h2>
+          <a class="btn btn-soft" href="./transaction-category.html?c=Groceries">Open in transaction view</a>
+        </header>
+        <table class="table" id="bcat-table">
+          <thead><tr><th>Date</th><th>Account</th><th>Merchant</th><th class="t-right">Amount</th></tr></thead>
+          <tbody>
+            <tr><td>2025-09-21</td><td>Checking</td><td>Trader Joe’s</td><td class="t-right">−$45.00</td></tr>
+            <tr><td>2025-09-12</td><td>Checking</td><td>Trader Joe’s</td><td class="t-right">−$50.00</td></tr>
+            <tr><td>2025-09-05</td><td>Checking</td><td>Amazon Fresh</td><td class="t-right">−$255.00</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

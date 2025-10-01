@@ -1,22 +1,80 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Account — Checking ****xxxx</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Account (manual)</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › Accounts › Checking
-  </nav>
+  <main class="container">
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a class="active" href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
 
-  <h1>Everyday Checking — ****xxxx</h1>
-  <p><strong>Balance:</strong> $1,847.13</p>
-  
-  <h2>Transactions</h2>
-  <ul>
-    <li><a href="./transaction.html">2025-09-18 • Trader Joes • $64.90</a></li>
-    <li><a href="./transaction.html">2025-09-02 • Trader Joes • $28.12</a></li>
-  </ul>
-  
-  <p><a href="./budget.html">⬅ Back to Sep 2025 Budget</a></p>
+    <section class="grid stretch">
+      <a href="./index.html" class="crumb">← Back to Dashboard</a>
+
+      <header class="row">
+        <h1>Account — Checking <span class="badge">Manual</span></h1>
+      </header>
+      <p class="hint">This is a manual balance. No bank details are linked.</p>
+
+      <section class="card span-3">
+        <h2>Current Balance</h2>
+        <div id="account-balance" class="kpi-value">$500.00</div>
+      </section>
+
+      <section class="card span-3">
+        <h2>Set / Edit Starting Balance</h2>
+        <form class="stack">
+          <label>Account Name
+            <input name="name" placeholder="Checking" value="Checking" />
+          </label>
+          <label>Starting Balance
+            <input name="starting" type="number" step="0.01" value="500.00" />
+          </label>
+          <button class="btn">Save</button>
+        </form>
+        <p class="hint">Starting balance doesn’t change monthly totals; only transactions do.</p>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Transactions</h2>
+          <a class="btn btn-soft" href="./transaction.html">＋ Add Transaction</a>
+        </header>
+        <table class="table">
+          <thead>
+            <tr><th>Date</th><th>Type</th><th>Category</th><th>Merchant</th><th class="t-right">Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2025-09-12</td><td>Expense</td><td>Groceries</td><td>Trader Joe’s</td><td class="t-right">−$50.00</td></tr>
+            <tr><td>2025-09-10</td><td>Income</td><td>Paycheck</td><td>Acme Co.</td><td class="t-right">+$800.00</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

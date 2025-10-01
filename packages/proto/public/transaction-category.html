@@ -1,23 +1,100 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Transaction Category — Groceries</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Transactions by Category</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › Transaction Categories › Groceries
-  </nav>
+  <main class="container">
 
-  <h1>Transaction Category: Groceries</h1>
-  <p><strong>Classifies:</strong> Expense transactions</p>
-  
-  <h2>Mapped Budget Category</h2>
-  <p><a href="./budget-category.html">Budget Category — Groceries</a></p>
-  
-  <h2>Example Transactions</h2>
-  <ul>
-    <li><a href="./transaction.html">T-00231 — Trader Joes — $64.90</a></li>
-    <li><a href="./transaction.html">T-00231 (repeat to show list)</a></li>
-  </ul>
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main -->
+    <section class="grid stretch">
+      <a href="./index.html" class="crumb">← Back to Dashboard</a>
+
+      <header class="row">
+        <h1 id="txcat-name">Groceries</h1>
+        <div class="row" style="gap:8px">
+          <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
+          <strong id="txcat-month">September 2025</strong>
+          <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="row">
+          <div>
+            <div class="muted">Total spent in this category (month)</div>
+            <div id="txcat-total" class="kpi-value">-$350.00</div>
+          </div>
+          <a class="btn btn-accent" href="./transaction.html">＋ Add Transaction</a>
+        </div>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Transactions</h2>
+          <span class="hint">Filtered where category = Groceries</span>
+        </header>
+        <table class="table" id="txcat-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Account</th>
+              <th>Merchant</th>
+              <th class="t-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-09-21</td>
+              <td>Checking</td>
+              <td>Trader Joe’s</td>
+              <td class="t-right">−$45.00</td>
+            </tr>
+            <tr>
+              <td>2025-09-12</td>
+              <td>Checking</td>
+              <td>Trader Joe’s</td>
+              <td class="t-right">−$50.00</td>
+            </tr>
+            <tr>
+              <td>2025-09-05</td>
+              <td>Checking</td>
+              <td>Amazon Fresh</td>
+              <td class="t-right">−$255.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

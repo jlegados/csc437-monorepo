@@ -1,21 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Transaction — T-00231</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — New Transaction</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › <a href="./transaction-category.html">Transaction Category</a> › Transaction
-  </nav>
+  <main class="container">
 
-  <h1>Transaction T-00231</h1>
-  <ul>
-    <li><strong>Date:</strong> 2025-09-18</li>
-    <li><strong>Amount:</strong> $64.90</li>
-    <li><strong>Merchant:</strong> <a href="./merchant.html">Trader Joes</a></li>
-    <li><strong>Account:</strong> <a href="./account.html">Everyday Checking ****xxxx</a></li>
-    <li><strong>Transaction Category:</strong> <a href="./transaction-category.html">Groceries</a></li>
-    <li><strong>Appears in Budget:</strong> <a href="./budget.html">Sep 2025</a></li>
-  </ul>
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+
+      <!-- Quick Add (centered, dropdown) -->
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html" class="active">New Transaction</a></li>
+        <li><a href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <section class="grid stretch">
+      <!-- Crumb back (text link) -->
+      <a href="./index.html" class="crumb">← Back to Dashboard</a>
+
+      <header class="row">
+        <h1>New Transaction</h1>
+      </header>
+
+      <form class="card stack span-3">
+        <div class="row">
+          <label>Account
+            <select name="accountId">
+              <option value="checking">Checking (manual)</option>
+              <option value="cash">Cash (manual)</option>
+            </select>
+          </label>
+
+          <label>Type
+            <select name="type">
+              <option value="expense" selected>Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row">
+          <label>Amount
+            <input name="amount" type="number" step="0.01" placeholder="0.00" required />
+          </label>
+          <label>Date
+            <input name="date" type="date" />
+          </label>
+        </div>
+
+        <div class="row">
+          <label>Category
+            <input name="category" placeholder="Groceries" list="category-suggestions" />
+            <datalist id="category-suggestions">
+              <option>Groceries</option><option>Bills</option><option>Personal</option><option>Medical</option>
+            </datalist>
+          </label>
+          <label>Merchant
+            <input name="merchant" placeholder="Trader Joe’s" />
+          </label>
+        </div>
+
+        <label>Note
+          <input name="note" placeholder="optional" />
+        </label>
+
+        <div class="row end">
+          <button class="btn btn-accent">Save Transaction</button>
+        </div>
+      </form>
+
+      <section class="card span-3">
+        <h2>How this affects your dashboard</h2>
+        <ul class="bullets">
+          <li><strong>Expense</strong> → raises “Total expenses”, lowers “Balance (this month)”, lowers the chosen account balance, and increases that category chip.</li>
+          <li><strong>Income</strong> → raises “Total income”, raises “Balance (this month)”, and raises the chosen account balance.</li>
+          <li>Starting balances don’t change monthly totals.</li>
+        </ul>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

@@ -1,0 +1,28 @@
+:root{
+  /* brand palette – soft blue UI with peach accent */
+  --bg:            #94A3B8;        /* page backdrop (muted blue-grey) */
+  --surface-1:     #BAC8E5;        /* card background */
+  --surface-2:     #D1DBF3;        /* chips/soft fills */
+  --surface-3:     #E7EDFF;        /* lighter fills */
+  --line:          rgba(0,0,0,.08);/* hairlines */
+
+  --text:          #0f172a;        /* primary text (slate-900) */
+  --text-muted:    rgba(15,23,42,.65);
+
+  --accent:        #FFC7C2;        /* peachy pink buttons */
+  --accent-ink:    #4a1210;
+  --accent-soft:   #ffe3e0;
+
+  --radius:        16px;            /* card radius */
+  --radius-lg:     20px;
+  --shadow:        0 4px 14px rgba(2, 6, 23, .12);
+  --shadow-soft:   0 2px 8px rgba(2, 6, 23, .08);
+
+  --container:     1200px;
+  --gap:           16px;
+
+  --font:          ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+@media (prefers-color-scheme: dark){
+  /* keep the same look; this app is light-ish anyway */
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CoinBear — Merchant</title>
+  <title>CoinBear — Merchants</title>
   <link rel="stylesheet" href="./styles/tokens.css" />
   <link rel="stylesheet" href="./styles/page.css" />
 </head>
@@ -40,61 +40,33 @@
       <a href="./index.html" class="crumb">← Back to Dashboard</a>
 
       <header class="row">
-        <h1 id="merchant-name">Trader Joe’s</h1>
+        <h1>Merchants</h1>
         <div class="row" style="gap:8px">
           <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
-          <strong id="merchant-month">September 2025</strong>
+          <strong id="merchants-month">September 2025</strong>
           <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
         </div>
       </header>
 
-      <section class="card">
+      <section class="card span-3">
+        <p class="hint">All merchants you’ve spent money at this month. Click a merchant to view details and transactions.</p>
+        <ul class="navlist" id="merchant-list">
+          <li><a href="./merchant.html?m=trader-joes">Trader Joe’s <span class="badge">-$95.00</span></a></li>
+          <li><a href="./merchant.html?m=starbucks">Starbucks <span class="badge">-$28.50</span></a></li>
+          <li><a href="./merchant.html?m=pge">PG&amp;E <span class="badge">-$120.00</span></a></li>
+          <li><a href="./merchant.html?m=amazon">Amazon <span class="badge">-$64.99</span></a></li>
+        </ul>
+      </section>
+
+      <section class="card span-3">
+        <h2>Totals</h2>
         <div class="row">
           <div>
-            <div class="muted">Total spent at this merchant (month)</div>
-            <div id="merchant-total" class="kpi-value">-$95.00</div>
+            <div class="muted">Total spent across merchants (month)</div>
+            <div id="merchants-total" class="kpi-value">-$308.49</div>
           </div>
           <a class="btn btn-accent" href="./transaction.html">＋ Add Transaction</a>
         </div>
-        <p class="hint">This page shows transactions where <strong>merchant = Trader Joe’s</strong>.</p>
-      </section>
-
-      <section class="card span-3">
-        <header class="row">
-          <h2>Transactions</h2>
-          <span class="hint">Only those with this merchant</span>
-        </header>
-        <table class="table" id="merchant-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Account</th>
-              <th>Category</th>
-              <th class="t-right">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2025-09-21</td>
-              <td>Checking</td>
-              <td>Groceries</td>
-              <td class="t-right">−$45.00</td>
-            </tr>
-            <tr>
-              <td>2025-09-12</td>
-              <td>Checking</td>
-              <td>Groceries</td>
-              <td class="t-right">−$50.00</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="card span-3">
-        <h2>Related</h2>
-        <ul class="navlist">
-          <li><a href="./transaction-category.html?c=Groceries">See Groceries category</a></li>
-        </ul>
       </section>
     </section>
   </main>

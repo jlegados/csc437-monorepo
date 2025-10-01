@@ -1,20 +1,83 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Category — Groceries</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Categories</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › Categories › Groceries
-  </nav>
+  <main class="container">
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a class="active" href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
 
-  <h1>Category: Groceries</h1>
-  <p><strong>Type:</strong> Expense</p>
-  
-  <h2>Appears In</h2>
-  <p><a href="./budget.html">Budget — Sep 2025</a></p>
-  
-  <h2>Classifies → Transaction Category</h2>
-  <p><a href="./transaction-category.html">Transaction Category — Groceries</a></p>
+    <section class="grid stretch">
+      <a href="./budget.html" class="crumb">← Back to Dashboard</a>
+
+      <header class="row">
+        <h1>Categories</h1>
+        <div class="row" style="gap:8px">
+          <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
+          <strong id="cat-month">September 2025</strong>
+          <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
+        </div>
+      </header>
+
+      <section class="card span-3">
+        <h2>Add Category</h2>
+        <form class="stack" id="cat-form">
+          <div class="row">
+            <label>Name
+              <input name="name" placeholder="Groceries" required />
+            </label>
+            <label>Planned (monthly)
+              <input name="planned" type="number" step="0.01" placeholder="0.00" />
+            </label>
+          </div>
+          <div class="row end">
+            <button class="btn btn-accent">Save Category</button>
+          </div>
+        </form>
+        <p class="hint">Planned amounts form your monthly budget plan; actuals come from transactions.</p>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>All Categories</h2>
+          <span class="hint">Click a category to view details</span>
+        </header>
+        <table class="table" id="cat-table">
+          <thead><tr><th>Category</th><th class="t-right">Planned</th><th class="t-right">Spent (month)</th><th style="width:40%">Progress</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><a href="./budget-category.html?c=Groceries">Groceries</a></td><td class="t-right">$350.00</td><td class="t-right">$350.00</td><td><progress value="350" max="350"></progress><div class="hint">100% used</div></td><td class="t-right"><a class="btn btn-soft" href="./transaction-category.html?c=Groceries">View tx</a></td></tr>
+            <tr><td><a href="./budget-category.html?c=Bills">Bills</a></td><td class="t-right">$450.00</td><td class="t-right">$420.00</td><td><progress value="420" max="450"></progress><div class="hint">93% used</div></td><td class="t-right"><a class="btn btn-soft" href="./transaction-category.html?c=Bills">View tx</a></td></tr>
+            <tr><td><a href="./budget-category.html?c=Personal">Personal</a></td><td class="t-right">$220.00</td><td class="t-right">$180.00</td><td><progress value="180" max="220"></progress><div class="hint">82% used</div></td><td class="t-right"><a class="btn btn-soft" href="./transaction-category.html?c=Personal">View tx</a></td></tr>
+            <tr><td><a href="./budget-category.html?c=Medical">Medical</a></td><td class="t-right">$120.00</td><td class="t-right">$95.00</td><td><progress value="95" max="120"></progress><div class="hint">79% used</div></td><td class="t-right"><a class="btn btn-soft" href="./transaction-category.html?c=Medical">View tx</a></td></tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

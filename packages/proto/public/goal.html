@@ -1,16 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Goal — Vacation Italy</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Goals & Wishlist</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <nav>
-    <a href="./index.html">Home</a> › Goals › Vacation
-  </nav>
+  <main class="container">
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a href="./category.html">Categories</a></li>
+        <li><a class="active" href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+    </aside>
 
-  <h1>Goal: Vacation — Italy</h1>
-  <p><strong>Target:</strong> $2,400 · <strong>Saved:</strong> $650</p>
-  <p><strong>Funded by Accounts:</strong> <a href="./account.html">Checking ****4321</a></p>
-  <p><a href="./budget.html">Appears in Sep 2025 Budget</a></p>
+    <section class="grid stretch">
+      <a href="./index.html" class="crumb">← Back to Dashboard</a>
+
+      <section class="card span-3">
+        <header class="row">
+          <h1>Goals</h1>
+          <a class="btn btn-accent" href="#new-goal">＋ New Goal</a>
+        </header>
+
+        <div class="stack" id="goal-list">
+          <article class="card">
+            <header class="row">
+              <div>
+                <strong>iPad Air 6th Gen</strong>
+                <div class="muted">Target: $500.00</div>
+              </div>
+              <div class="kpi-value">$20.00 saved</div>
+            </header>
+            <progress value="20" max="1000"></progress>
+            <div class="row"><span class="hint">2% complete</span><a class="btn btn-soft" href="./transaction.html">Add contribution</a></div>
+          </article>
+
+          <article class="card">
+            <header class="row">
+              <div>
+                <strong>Emergency Fund</strong>
+                <div class="muted">Target: $2,000.00</div>
+              </div>
+              <div class="kpi-value">$600.00 saved</div>
+            </header>
+            <progress value="600" max="2000"></progress>
+            <div class="row"><span class="hint">30% complete</span><a class="btn btn-soft" href="./transaction.html">Add contribution</a></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="new-goal" class="card span-3">
+        <h2>Add Goal</h2>
+        <form class="stack">
+          <div class="row">
+            <label>Name<input name="name" placeholder="New Laptop" required /></label>
+            <label>Target amount<input name="target" type="number" step="0.01" placeholder="0.00" required /></label>
+            <label>Deadline (optional)<input name="deadline" type="date" /></label>
+          </div>
+          <div class="row end"><button class="btn btn-accent">Save Goal</button></div>
+        </form>
+        <p class="hint">Contributions can be recorded as transfers (recommended) or expenses under a “Goal” category.</p>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Wishlist</h2>
+          <a class="btn btn-soft" href="#new-wish">＋ Add Wish</a>
+        </header>
+        <ul class="chip-list" id="wish-list">
+          <li class="chip chip-soft">Weekend Trip <strong>$300</strong></li>
+          <li class="chip chip-soft">iPad Case <strong>$45</strong></li>
+        </ul>
+      </section>
+
+      <section id="new-wish" class="card span-3">
+        <h2>Add Wish</h2>
+        <form class="row">
+          <label>Item<input name="wish" placeholder="Noise-canceling headphones" required /></label>
+          <label>Estimated cost<input name="cost" type="number" step="0.01" placeholder="0.00" /></label>
+          <button class="btn">Save Wish</button>
+        </form>
+        <p class="hint">Wishlist doesn’t affect totals until you actually buy the item.</p>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

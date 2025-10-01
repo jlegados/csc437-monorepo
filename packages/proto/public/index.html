@@ -1,20 +1,100 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Budget Proto — Home</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Dashboard</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 </head>
 <body>
-  <h1>Budget Test</h1>
-  <p>Start here. Everything should be reachable from this page.</p>
-  <ul>
-    <li><a href="./budget.html">Budget (Sep 2025)</a></li>
-    <li><a href="./account.html">Account — Checking ****xxxx</a></li>
-    <li><a href="./category.html">Category</a></li>
-    <li><a href="./transaction-category.html">Transaction Category</a></li>
-    <li><a href="./merchant.html">Merchant</a></li>
-    <li><a href="./transaction.html">Transaction</a></li>
-    <li><a href="./budget-category.html">Budget Category — Groceries</a></li>
-    <li><a href="./goal.html">Goal — Travel the world</a></li>
-  </ul>
+  <main class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+
+      <!-- Quick Add (centered, dropdown) -->
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li><a href="./budget.html">Budget (Sep 2025)</a></li>
+        <li><a href="./account.html">Account — Checking (manual)</a></li>
+        <li><a href="./transaction.html">New Transaction</a></li>
+        <li><a href="./category.html">Categories</a></li>
+        <li><a href="./goal.html">Goals</a></li>
+        <li><a href="./merchants.html">Merchants</a></li>
+      </ul>
+
+      <section class="card">
+        <h3>★ Goal</h3>
+        <figure class="goal">
+          <img src="./images/ipad.jpg" alt="" class="goal-img" />
+          <figcaption>
+            <strong>iPad Air 6th Gen</strong>
+            <div class="muted">$500.00</div>
+            <progress value="2" max="100"></progress>
+            <div class="muted">2%</div>
+          </figcaption>
+        </figure>
+      </section>
+    </aside>
+
+    <!-- Main dashboard content -->
+    <section class="grid stretch">
+
+      <div class="card kpi">
+        <div class="muted">Total income (this month)</div>
+        <div id="total-income" class="kpi-value">$3,200</div>
+        <div class="hint">Month-to-date totals based on manual accounts</div>
+      </div>
+
+      <div class="card kpi">
+        <div class="muted">Total expenses (this month)</div>
+        <div id="total-expenses" class="kpi-value">$2,850</div>
+        <div class="hint">Month-to-date totals based on manual accounts</div>
+      </div>
+
+      <div class="card kpi">
+        <div class="muted">Balance (this month)</div>
+        <div id="total-balance" class="kpi-value">$350</div>
+        <div class="hint">income − expenses</div>
+      </div>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Expenses by Category</h2>
+          <a class="btn btn-soft" href="./category.html">＋ New Category</a>
+        </header>
+        <ul id="category-list" class="chip-list">
+          <li class="chip">Groceries <strong>$350</strong></li>
+          <li class="chip">Bills <strong>$420</strong></li>
+          <li class="chip">Personal <strong>$180</strong></li>
+          <li class="chip">Medical <strong>$95</strong></li>
+        </ul>
+      </section>
+
+      <section class="card span-3">
+        <header class="row">
+          <h2>Wishlist</h2>
+          <a class="btn btn-soft" href="./goal.html">＋ New Wish</a>
+        </header>
+        <ul class="chip-list">
+          <li class="chip chip-soft">Weekend Trip <strong>$300</strong></li>
+          <li class="chip chip-soft">iPad Case <strong>$45</strong></li>
+        </ul>
+      </section>
+
+    </section>
+  </main>
 </body>
 </html>
