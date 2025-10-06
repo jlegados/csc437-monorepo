@@ -4,11 +4,18 @@ html,body{height:100%}
 html{font-size:16px}
 body{
   margin:0;
-  font-family:var(--font);
+  font-family:var(--font-body);
   color:var(--text);
   background:linear-gradient(180deg, var(--bg), #8394ad 60%);
 }
 
+h1, h2, h3,
+.section-title,
+.stat .value,
+.goal-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600; 
+}
 /* layout */
 .container{
   max-width:var(--container);
@@ -34,13 +41,15 @@ body{
 }
 .navlist{list-style:none;margin:8px 0;padding:0;display:grid;gap:8px}
 .navlist a{
-  display:block;
+  display:flex;
   padding:8px 10px;
   border-radius:12px;
   text-decoration:none;
   color:var(--text);
   background:rgba(255,255,255,.35);
   border:1px solid var(--line);
+  gap: 0.50rem;
+  align-items: center;
 }
 .navlist a:hover{background:rgba(255,255,255,.55)}
 
@@ -173,3 +182,16 @@ progress::-webkit-progress-value{background:var(--accent);}
   .grid{grid-template-columns:1fr}
   .span-3{grid-column:auto}
 }
+
+/* SVG icons */
+svg.icon {
+  width: 24px;
+  height: 24px;
+  display: block;          
+  flex: 0 0 24px;
+  fill: currentColor;
+}
+
+
+
+
