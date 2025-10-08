@@ -1,12 +1,9 @@
-/* base reset */
-*{box-sizing:border-box}
-html,body{height:100%}
-html{font-size:16px}
-body{
-  margin:0;
-  font-family:var(--font-body);
-  color:var(--text);
-  background:linear-gradient(180deg, var(--bg), #8394ad 60%);
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg), #8394ad 60%);
 }
 
 h1, h2, h3,
