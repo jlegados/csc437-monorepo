@@ -14,7 +14,7 @@ h1, h2, h3,
   font-weight: 600; 
 }
 /* layout */
-.container{
+.container{ 
   max-width:var(--container);
   margin:32px auto;
   padding:0 16px;
@@ -30,8 +30,16 @@ h1, h2, h3,
   box-shadow:var(--shadow);
   padding:18px;
 }
-.logo{width:84px;height:84px;display:block;margin:6px auto 10px}
-.logo-large{filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+.logo{
+  width:84px;
+  height:84px;
+  display:block;
+  margin:6px auto 10px
+}
+
+.logo-large{
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))
+}
 .sidebar h2{
   margin:10px 0 8px;
   font-size:1.15rem;
@@ -139,6 +147,9 @@ h1, h2, h3,
   padding:8px 12px;border-radius:12px;font-weight:600;
   background:#fff;border:1px solid var(--line);
   box-shadow:var(--shadow-soft);
+  display: inline-flex;          /* was inline */
+  align-items: center;
+  white-space: nowrap;
 }
 .btn:hover{filter:brightness(.98)}
 .btn-accent{background:var(--accent);color:var(--accent-ink)}
@@ -190,5 +201,102 @@ svg.icon {
 }
 
 
+/* ===== Header (Flex layout) ===== */
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:12px 16px; margin:0 auto 16px;
+  max-width:var(--container); color:var(--text);
+}
+
+.app-left{ display:flex; align-items:center; gap:12px; }
+.titles{ display:grid; line-height:1; }
+.app-name{ font-size:1.2rem; margin:0; }
+.page-name{ color: var(--text-muted); font-size:.875rem; }
+
+.app-header .logo{
+  width:40px; height:40px; border-radius:10px;
+  background:none; border:0;
+  display:block;
+}
+
+.app-nav{ display:flex; gap:12px; flex-wrap:wrap; }
+.app-nav a{
+  text-decoration:none; color:var(--text);
+  background:var(--surface-2); border:1px solid var(--line);
+  padding:6px 10px; border-radius:999px;
+}
+.app-nav a:hover{ background:var(--surface-3); }
+
+.app-user{ display:flex; align-items:center; gap:10px; }
+.user-name{ font-weight:600; }
+
+/* Small screens */
+@media (max-width:640px){
+  .app-header{ align-items:flex-start; }
+  .app-user{ margin-left:auto; }
+}
 
 
+/* Bubble-style nav buttons */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;                     /* space between icon and text */
+  padding: 6px 14px;            /* smaller padding to shrink height */
+  border-radius: 999px;         /* keeps the bubble shape */
+  background: var(--surface-3);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.95rem;           /* makes text consistent */
+  line-height: 1.1;
+  transition: background 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: var(--surface-2);
+}
+
+/* Icon sizing inside */
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+  opacity: 0.85;
+}
+
+/* ---- Grid system ---- */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap:24px;
+  align-content:start;
+}
+
+/* column span utilities */
+.col-1{grid-column:span 1}
+.col-2{grid-column:span 2}
+.col-3{grid-column:span 3}
+.col-4{grid-column:span 4}
+.col-5{grid-column:span 5}
+.col-6{grid-column:span 6}
+.col-7{grid-column:span 7}
+.col-8{grid-column:span 8}
+.col-9{grid-column:span 9}
+.col-10{grid-column:span 10}
+.col-11{grid-column:span 11}
+.col-12{grid-column:span 12}
+
+/* responsive helpers */
+@media (max-width: 1060px){
+  .md-col-6{grid-column:span 6}
+  .md-col-4{grid-column:span 4}
+  .md-col-3{grid-column:span 3}
+  .md-col-12{grid-column:span 12}
+}
+@media (max-width: 700px){
+  .sm-full{grid-column:1 / -1}
+}

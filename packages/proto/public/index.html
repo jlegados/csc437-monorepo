@@ -12,6 +12,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Header (Flex) -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Dashboard</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="./budget.html" class="btn-icon" aria-current="page">
+        <svg class="icon"><use href="./icons/icons.svg#icon-budget"></use></svg>
+        Budget
+      </a>
+      <a href="./category.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="./goal.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="./merchants.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
+        Merchants
+      </a>
+    </nav>
+    
+    
+
+    <div class="app-user">
+      <span class="user-name">Hi, Julianne</span>
+    </div>
+  </header>
+
   <main class="container">
     <!-- Sidebar -->
     <aside class="sidebar card">
@@ -31,12 +68,6 @@
 
       <ul class="navlist">
         <li>
-          <a href="./budget.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
-            Budget
-          </a>
-        </li>
-        <li>
           <a href="./account.html">
             <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
             Account
@@ -46,24 +77,6 @@
           <a href="./transaction.html">
             <svg class="icon"><use href="./icons/icons.svg#icon-account"></use></svg>
             New Transaction
-          </a>
-        </li>
-        <li>
-          <a href="./category.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
-            Categories
-          </a>
-        </li>
-        <li>
-          <a href="./goal.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
-            Goals
-          </a>
-        </li>
-        <li>
-          <a href="./merchants.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
-            Merchants
           </a>
         </li>
       </ul>
@@ -85,25 +98,27 @@
     <!-- Main dashboard content -->
     <section class="grid stretch">
 
-      <div class="card kpi">
+      <!-- KPIs -->
+      <div class="card kpi col-4 md-col-6 sm-full"> 
         <div class="muted">Total income (this month)</div>
         <div id="total-income" class="kpi-value">$3,200</div>
         <div class="hint">Month-to-date totals based on manual accounts</div>
       </div>
-
-      <div class="card kpi">
-        <div class="muted">Total expenses (this month)</div>
+    
+      <div class="card kpi col-4 md-col-6 sm-full"> 
+         <div class="muted">Total expenses (this month)</div>
         <div id="total-expenses" class="kpi-value">$2,850</div>
         <div class="hint">Month-to-date totals based on manual accounts</div>
       </div>
-
-      <div class="card kpi">
+    
+      <div class="card kpi col-4 md-col-6 sm-full"> 
         <div class="muted">Balance (this month)</div>
         <div id="total-balance" class="kpi-value">$350</div>
         <div class="hint">income − expenses</div>
       </div>
-
-      <section class="card span-3">
+    
+      <!-- Full-width sections -->
+      <section class="card col-12">
         <header class="row">
           <h2>Expenses by Category</h2>
           <a class="btn btn-soft" href="./category.html">＋ New Category</a>
@@ -115,8 +130,8 @@
           <li class="chip">Medical <strong>$95</strong></li>
         </ul>
       </section>
-
-      <section class="card span-3">
+    
+      <section class="card col-12">
         <header class="row">
           <h2>Wishlist</h2>
           <a class="btn btn-soft" href="./goal.html">＋ New Wish</a>
@@ -126,7 +141,8 @@
           <li class="chip chip-soft">iPad Case <strong>$45</strong></li>
         </ul>
       </section>
-
+  
+    
     </section>
   </main>
 </body>

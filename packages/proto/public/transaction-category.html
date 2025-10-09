@@ -12,11 +12,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Header (Flex) -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Transactions by Category</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="./budget.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+        Budget
+      </a>
+      <a href="./category.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="./goal.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="./merchants.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+        Merchants
+      </a>
+    </nav>
+  </header>
+
   <main class="container">
 
     <!-- Sidebar -->
     <aside class="sidebar card">
       <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+
       <div class="quickadd-wrap">
         <details class="quickadd">
           <summary class="btn btn-accent">＋ Quick Add</summary>
@@ -28,17 +60,12 @@
         </details>
       </div>
 
-      <h2>Pages</h2>
       <ul class="navlist">
         <li>
-          <a href="./budget.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
-            Budget
-          </a>
-        </li>
-        <li>
           <a href="./account.html">
-            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
+            <svg class="icon" preserveAspectRatio="xMidYMid meet">
+              <use href="./icons/icons.svg#icon-account2"></use>
+            </svg>
             Account
           </a>
         </li>
@@ -48,32 +75,15 @@
             New Transaction
           </a>
         </li>
-        <li>
-          <a href="./category.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
-            Categories
-          </a>
-        </li>
-        <li>
-          <a href="./goal.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
-            Goals
-          </a>
-        </li>
-        <li>
-          <a href="./merchants.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
-            Merchants
-          </a>
-        </li>
       </ul>
     </aside>
 
-    <!-- Main -->
+    <!-- Main Content -->
     <section class="grid stretch">
-      <a href="./index.html" class="crumb">← Back to Dashboard</a>
 
-      <header class="row">
+      <a href="./index.html" class="crumb col-12">← Back to Dashboard</a>
+
+      <header class="row col-12">
         <h1 id="txcat-name">Groceries</h1>
         <div class="row" style="gap:8px">
           <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
@@ -82,21 +92,25 @@
         </div>
       </header>
 
-      <section class="card">
+      <!-- Summary Card -->
+      <section class="card col-4 md-col-8 sm-full">
         <div class="row">
           <div>
             <div class="muted">Total spent in this category (month)</div>
-            <div id="txcat-total" class="kpi-value">-$350.00</div>
+            <div id="txcat-total" class="kpi-value">−$350.00</div>
           </div>
           <a class="btn btn-accent" href="./transaction.html">＋ Add Transaction</a>
         </div>
+        <p class="hint">Showing transactions where <strong>category = Groceries</strong>.</p>
       </section>
 
-      <section class="card span-3">
+      <!-- Transactions Table -->
+      <section class="card col-8 md-col-8 sm-full">
         <header class="row">
           <h2>Transactions</h2>
-          <span class="hint">Filtered where category = Groceries</span>
+          <span class="hint">Filtered by this category</span>
         </header>
+
         <table class="table" id="txcat-table">
           <thead>
             <tr>

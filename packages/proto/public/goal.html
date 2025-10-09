@@ -12,9 +12,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Header (Flex) -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Goals & Wishlist</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="./budget.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+        Budget
+      </a>
+      <a href="./category.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="./goal.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="./merchants.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+        Merchants
+      </a>
+    </nav>
+  </header>
+
   <main class="container">
+
+    <!-- Sidebar -->
     <aside class="sidebar card">
       <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+
       <div class="quickadd-wrap">
         <details class="quickadd">
           <summary class="btn btn-accent">＋ Quick Add</summary>
@@ -25,17 +59,13 @@
           </div>
         </details>
       </div>
-      <h2>Pages</h2>
+
       <ul class="navlist">
         <li>
-          <a href="./budget.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
-            Budget
-          </a>
-        </li>
-        <li>
           <a href="./account.html">
-            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
+            <svg class="icon" preserveAspectRatio="xMidYMid meet">
+              <use href="./icons/icons.svg#icon-account2"></use>
+            </svg>
             Account
           </a>
         </li>
@@ -45,31 +75,16 @@
             New Transaction
           </a>
         </li>
-        <li>
-          <a href="./category.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
-            Categories
-          </a>
-        </li>
-        <li>
-          <a href="./goal.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
-            Goals
-          </a>
-        </li>
-        <li>
-          <a href="./merchants.html">
-            <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
-            Merchants
-          </a>
-        </li>
       </ul>
     </aside>
 
+    <!-- Main content -->
     <section class="grid stretch">
-      <a href="./index.html" class="crumb">← Back to Dashboard</a>
 
-      <section class="card span-3">
+      <a href="./index.html" class="crumb col-12">← Back to Dashboard</a>
+
+      <!-- Goals section -->
+      <section class="card col-12">
         <header class="row">
           <h1>Goals</h1>
           <a class="btn btn-accent" href="#new-goal">＋ New Goal</a>
@@ -85,7 +100,10 @@
               <div class="kpi-value">$20.00 saved</div>
             </header>
             <progress value="20" max="1000"></progress>
-            <div class="row"><span class="hint">2% complete</span><a class="btn btn-soft" href="./transaction.html">Add contribution</a></div>
+            <div class="row">
+              <span class="hint">2% complete</span>
+              <a class="btn btn-soft" href="./transaction.html">Add contribution</a>
+            </div>
           </article>
 
           <article class="card">
@@ -97,25 +115,38 @@
               <div class="kpi-value">$600.00 saved</div>
             </header>
             <progress value="600" max="2000"></progress>
-            <div class="row"><span class="hint">30% complete</span><a class="btn btn-soft" href="./transaction.html">Add contribution</a></div>
+            <div class="row">
+              <span class="hint">30% complete</span>
+              <a class="btn btn-soft" href="./transaction.html">Add contribution</a>
+            </div>
           </article>
         </div>
       </section>
 
-      <section id="new-goal" class="card span-3">
+      <!-- Add Goal -->
+      <section id="new-goal" class="card col-12">
         <h2>Add Goal</h2>
         <form class="stack">
           <div class="row">
-            <label>Name<input name="name" placeholder="New Laptop" required /></label>
-            <label>Target amount<input name="target" type="number" step="0.01" placeholder="0.00" required /></label>
-            <label>Deadline (optional)<input name="deadline" type="date" /></label>
+            <label>Name
+              <input name="name" placeholder="New Laptop" required />
+            </label>
+            <label>Target amount
+              <input name="target" type="number" step="0.01" placeholder="0.00" required />
+            </label>
+            <label>Deadline (optional)
+              <input name="deadline" type="date" />
+            </label>
           </div>
-          <div class="row end"><button class="btn btn-accent">Save Goal</button></div>
+          <div class="row end">
+            <button class="btn btn-accent">Save Goal</button>
+          </div>
         </form>
         <p class="hint">Contributions can be recorded as transfers (recommended) or expenses under a “Goal” category.</p>
       </section>
 
-      <section class="card span-3">
+      <!-- Wishlist -->
+      <section class="card col-12">
         <header class="row">
           <h2>Wishlist</h2>
           <a class="btn btn-soft" href="#new-wish">＋ Add Wish</a>
@@ -126,12 +157,17 @@
         </ul>
       </section>
 
-      <section id="new-wish" class="card span-3">
+      <!-- Add Wish -->
+      <section id="new-wish" class="card col-12">
         <h2>Add Wish</h2>
         <form class="row">
-          <label>Item<input name="wish" placeholder="Noise-canceling headphones" required /></label>
-          <label>Estimated cost<input name="cost" type="number" step="0.01" placeholder="0.00" /></label>
-          <button class="btn">Save Wish</button>
+          <label>Item
+            <input name="wish" placeholder="Noise-canceling headphones" required />
+          </label>
+          <label>Estimated cost
+            <input name="cost" type="number" step="0.01" placeholder="0.00" />
+          </label>
+          <button class="btn btn-accent">Save Wish</button>
         </form>
         <p class="hint">Wishlist doesn’t affect totals until you actually buy the item.</p>
       </section>
