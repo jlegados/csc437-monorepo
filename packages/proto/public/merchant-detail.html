@@ -23,8 +23,8 @@
     </div>
 
     <nav class="app-nav" aria-label="Primary">
-      <a href="./budget.html" class="btn-icon">
-        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+      <a href="./budget.html" class="btn-icon" aria-current="page">
+        <svg class="icon"><use href="./icons/icons.svg#icon-budget"></use></svg>
         Budget
       </a>
       <a href="./category.html" class="btn-icon">
@@ -36,15 +36,13 @@
         Goals
       </a>
       <a href="./merchants.html" class="btn-icon">
-        <svg class="icon"><use href="./icons/icons.svg#icon-merchants"></use></svg>
+        <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
         Merchants
       </a>
     </nav>
-    
   </header>
 
   <main class="container">
-
     <!-- Sidebar -->
     <aside class="sidebar card">
       <img src="./images/coinbear.png" alt="CoinBear" class="logo logo-large" />
@@ -63,7 +61,7 @@
       <ul class="navlist">
         <li>
           <a href="./account.html">
-            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
+            <svg class="icon"><use href="./icons/icons.svg#icon-account2"></use></svg>
             Account
           </a>
         </li>
@@ -89,7 +87,6 @@
         </div>
       </header>
     
-      <!-- Summary (4/12) + Related (4/12) next to Transactions (8/12) or stack on small -->
       <section class="card col-4 md-col-8 sm-full">
         <div class="row">
           <div>
@@ -139,7 +136,8 @@
         </ul>
       </section>
     </section>
-  
   </main>
+
+  <script type="module" src="./scripts/theme.js"></script>
 </body>
 </html>

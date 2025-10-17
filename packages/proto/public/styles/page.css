@@ -1,9 +1,11 @@
 html { font-size: 16px; }
 
-body {
-  font-family: var(--font-body);
-  color: var(--text);
-  background: linear-gradient(180deg, var(--bg), #8394ad 60%);
+body{
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(107,138,253,.12), transparent 60%),
+              radial-gradient(800px 500px at 110% 0%, rgba(255,215,215,.12), transparent 50%),
+              var(--color-background-page);
+  color: var(--color-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 h1, h2, h3,
@@ -299,4 +301,211 @@ svg.icon {
 }
 @media (max-width: 700px){
   .sm-full{grid-column:1 / -1}
+}
+
+/* ===== DARK MODE POLISH ===== */
+
+/* Subtle vignette / spotlight so content stands out */
+body.dark-mode {
+  background:
+    radial-gradient(900px 480px at 35% -10%, rgba(156,192,255,.10), transparent 60%),
+    radial-gradient(700px 420px at 110% 0%, rgba(255,180,180,.10), transparent 55%),
+    var(--color-background-page);
+}
+
+/* Cards: crisper edge + soft lift */
+body.dark-mode .card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-1) 96%, #fff 4%),
+    var(--surface-1)
+  );
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* KPI contrast and text */
+body.dark-mode .kpi .muted {
+  color: color-mix(in oklab, var(--text-muted) 85%, #fff 15%);
+}
+body.dark-mode .kpi .kpi-value {
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* ---------- Pills, Chips, and Buttons ---------- */
+
+body.dark-mode .chip,
+body.dark-mode .chip-soft,
+body.dark-mode .card .btn.btn-soft,
+body.dark-mode .app-nav .btn-icon {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  padding: 8px 12px;
+  transition: all 0.15s ease;
+}
+
+/* Softer accent variant (e.g., Wishlist chips) */
+body.dark-mode .chip-soft {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--accent-soft) 92%, #fff 8%),
+    var(--accent-soft)
+  );
+}
+
+/* Header action pills (+ New Category / + New Wish) */
+body.dark-mode .card header .btn.btn-soft {
+  padding: 8px 14px;
+  font-weight: 700;
+}
+
+/* Hover + active states */
+body.dark-mode .chip:hover,
+body.dark-mode .chip-soft:hover,
+body.dark-mode .card .btn.btn-soft:hover,
+body.dark-mode .app-nav .btn-icon:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
+}
+body.dark-mode .chip:active,
+body.dark-mode .chip-soft:active,
+body.dark-mode .card .btn.btn-soft:active,
+body.dark-mode .app-nav .btn-icon:active {
+  transform: translateY(0);
+}
+
+body.dark-mode .chip strong {
+  font-weight: 800;
+  color: #fff;
+}
+
+/* ---------- Text Color Unification ---------- */
+
+/* Headings inside cards (Goal, Expenses, Wishlist, etc.) */
+body.dark-mode .card h2,
+body.dark-mode .card h3,
+body.dark-mode section.card header h2,
+body.dark-mode .goal strong {
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* General card text */
+body.dark-mode .card,
+body.dark-mode .card .muted,
+body.dark-mode .card figcaption,
+body.dark-mode .chip-list,
+body.dark-mode .goal {
+  color: #e8ebf5 !important;
+}
+
+/* Muted subtext */
+body.dark-mode .muted {
+  opacity: 0.85;
+  font-weight: 500;
+  color: #d7dbea !important;
+}
+
+/* Ensure header buttons + titles stay white */
+body.dark-mode .card header.row h2,
+body.dark-mode .card header.row .btn-soft {
+  color: #fff !important;
+}
+
+/* Goal section refinement */
+body.dark-mode .goal .muted {
+  opacity: 0.85;
+  font-weight: 500;
+  color: #d7dbea !important;
+}
+
+/* Category & Wishlist cards edge highlight */
+body.dark-mode .card.col-12 {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* -------------------------------
+   Merchant Detail – dark mode fix
+--------------------------------*/
+body.dark-mode .card h1,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode header.row h1,
+body.dark-mode header.row h2 {
+  color: #fff !important;
+}
+
+/* Fix arrow buttons ◀ ▶ */
+body.dark-mode .btn.btn-soft {
+  color: #fff !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark-mode .btn.btn-soft:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
+}
+
+/* Merchant month label text */
+body.dark-mode #merchant-month {
+  color: #fff !important;
+}
+
+/* -------------------------------------------------------
+   UNIVERSAL DARK MODE TEXT FIX — headers, months, labels
+--------------------------------------------------------*/
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode header strong,
+body.dark-mode [id*="month"] {
+  color: #fff !important;
+}
+
+/* keep soft buttons visible */
+body.dark-mode .btn.btn-soft {
+  color: #fff !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark-mode .btn.btn-soft:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
 }

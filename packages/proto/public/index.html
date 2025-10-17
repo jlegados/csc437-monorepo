@@ -41,11 +41,15 @@
         Merchants
       </a>
     </nav>
-    
-    
 
     <div class="app-user">
       <span class="user-name">Hi, Julianne</span>
+
+      <!-- THEME TOGGLE -->
+      <label id="theme-toggle" class="row" style="gap:6px;cursor:pointer;align-items:center;margin-left:12px;">
+        <input id="darkmode-input" type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
     </div>
   </header>
 
@@ -69,7 +73,7 @@
       <ul class="navlist">
         <li>
           <a href="./account.html">
-            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
+            <svg class="icon"><use href="./icons/icons.svg#icon-account2"></use></svg>
             Account
           </a>
         </li>
@@ -142,8 +146,10 @@
         </ul>
       </section>
   
-    
     </section>
   </main>
+
+  <!-- connect your theme logic -->
+  <script type="module" src="./scripts/theme.js"></script>
 </body>
 </html>
