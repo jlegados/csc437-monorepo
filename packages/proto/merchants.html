@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Merchants</title>
+
+  <link rel="stylesheet" href="/styles/reset.css" />
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/page.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+   <script type="module" src="/src/merchant-card.ts"></script> 
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="/images/coinbear.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Merchant</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="/budget.html" class="btn-icon" aria-current="page">
+        <svg class="icon"><use href="/icons/icons.svg#icon-budget"></use></svg>
+        Budget
+      </a>
+      <a href="/category.html" class="btn-icon">
+        <svg class="icon"><use href="/icons/icons.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="/goal.html" class="btn-icon">
+        <svg class="icon"><use href="/icons/icons.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="/merchants.html" class="btn-icon">
+        <svg class="icon"><use href="/icons/icons.svg#icon-transactions"></use></svg>
+        Merchants
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar card">
+      <img src="/images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="/goal.html">New Goal</a>
+            <a href="/transaction.html">New Income</a>
+            <a href="/transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li>
+          <a href="/account.html">
+            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="/icons/icons.svg#icon-account2"></use></svg>
+            Account
+          </a>
+        </li>
+        <li>
+          <a href="/transaction.html">
+            <svg class="icon"><use href="/icons/icons.svg#icon-account"></use></svg>
+            New Transaction
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main -->
+    <section class="grid stretch">
+      <a href="/index.html" class="crumb col-12 sm-full">← Back to Dashboard</a>
+
+      <header class="row col-12">
+        <h1>Merchants</h1>
+        <div class="row" style="gap:8px">
+          <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
+          <strong id="merchants-month">September 2025</strong>
+          <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
+        </div>
+      </header>
+
+      <!-- You can keep the simple list… -->
+      <section class="card col-8 md-col-8 sm-full">
+        <p class="hint">All merchants you’ve spent money at this month. Click a merchant to view details and transactions.</p>
+        <ul class="navlist" id="merchant-list">
+          <li><a href="/merchant-detail.html?m=trader-joes">Trader Joe’s <span class="badge">-$95.00</span></a></li>
+          <li><a href="/merchant-detail.html?m=starbucks">Starbucks <span class="badge">-$28.50</span></a></li>
+          <li><a href="/merchant-detail.html?m=pge">PG&amp;E <span class="badge">-$120.00</span></a></li>
+          <li><a href="/merchant-detail.html?m=amazon">Amazon <span class="badge">-$64.99</span></a></li>
+        </ul>
+      </section>
+
+      <!-- …or convert to <merchant-card> later if you want the fancy tiles -->
+
+      <section class="card col-4 md-col-4 sm-full">
+        <h2>Totals</h2>
+        <div class="row">
+          <div>
+            <div class="muted">Total spent across merchants (month)</div>
+            <div id="merchants-total" class="kpi-value">-$308.49</div>
+          </div>
+          <a class="btn btn-accent" href="/transaction.html">＋ Add Transaction</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="/scripts/theme.js"></script>
+</body>
+</html>

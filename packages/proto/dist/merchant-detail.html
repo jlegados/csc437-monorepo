@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoinBear — Merchant</title>
+
+    <!-- styles from /public -->
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/merchant-COfOtDri.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/lit-element-DMCH56eX.js">
+  </head>
+
+  <body>
+    <header class="app-header">
+      <div class="app-left">
+        <img src="/images/coinbear.png" alt="CoinBear" class="logo" />
+        <div class="titles">
+          <h1 class="app-name">CoinBear</h1>
+          <div class="page-name">Merchant Detail</div>
+        </div>
+      </div>
+
+      <nav class="app-nav" aria-label="Primary">
+        <a href="/budget.html" class="btn-icon" aria-current="page">
+          <svg class="icon"><use href="/icons/icons.svg#icon-budget"></use></svg>
+          Budget
+        </a>
+        <a href="/category.html" class="btn-icon">
+          <svg class="icon"><use href="/icons/icons.svg#icon-categories"></use></svg>
+          Categories
+        </a>
+        <a href="/goal.html" class="btn-icon">
+          <svg class="icon"><use href="/icons/icons.svg#icon-savings"></use></svg>
+          Goals
+        </a>
+        <a href="/merchants.html" class="btn-icon">
+          <svg class="icon"><use href="/icons/icons.svg#icon-transactions"></use></svg>
+          Merchants
+        </a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <aside class="sidebar card">
+        <img src="/images/coinbear.png" alt="CoinBear" class="logo logo-large" />
+        <div class="quickadd-wrap">
+          <details class="quickadd">
+            <summary class="btn btn-accent">＋ Quick Add</summary>
+            <div class="menu">
+              <a href="/goal.html">New Goal</a>
+              <a href="/transaction.html">New Income</a>
+              <a href="/transaction.html">New Expense</a>
+            </div>
+          </details>
+        </div>
+
+        <h2>Pages</h2>
+        <ul class="navlist">
+          <li>
+            <a href="/account.html">
+              <svg class="icon"><use href="/icons/icons.svg#icon-account2"></use></svg>
+              Account
+            </a>
+          </li>
+          <li>
+            <a href="/transaction.html">
+              <svg class="icon"><use href="/icons/icons.svg#icon-account"></use></svg>
+              New Transaction
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <section class="grid stretch">
+        <a href="/merchants.html" class="crumb col-12">← Back to Merchants</a>
+
+        <merchant-detail
+          id="md"
+          logo-src="/images/merchants/traderjoes.png"
+          website-href="https://www.traderjoes.com"
+          phone="+1 (800) 123-4567"
+          category="Groceries"
+          monthly-spend="95.00"
+          transactions="2"
+          last-date="2025-09-21">
+          <span slot="name">Trader Joe’s</span>
+          <span slot="address">3970 Broad St, San Luis Obispo, CA</span>
+          <span slot="notes">Neighborhood grocery · accepts Apple Pay</span>
+        </merchant-detail>
+
+        <section class="card col-8 md-col-8 sm-full">
+          <header class="row">
+            <h2>Transactions</h2>
+            <span class="hint">Only those with this merchant</span>
+          </header>
+          <table class="table" id="merchant-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Category</th>
+                <th class="t-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-09-21</td>
+                <td>Checking</td>
+                <td>Groceries</td>
+                <td class="t-right">−$45.00</td>
+              </tr>
+              <tr>
+                <td>2025-09-12</td>
+                <td>Checking</td>
+                <td>Groceries</td>
+                <td class="t-right">−$50.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card col-4 md-col-8 sm-full">
+          <h2>Related</h2>
+          <ul class="navlist">
+            <li><a href="/transaction-category.html?c=Groceries">See Groceries category</a></li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <!-- theme + component -->
+    <script type="module" src="/scripts/theme.js"></script>
+
+    <!-- simple data switcher by ?m= -->
+  </body>
+</html>

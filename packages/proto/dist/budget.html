@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Budget (Monthly)</title>
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header (Flex) -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="./images/coinbear.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Budget</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="./budget.html" class="btn-icon" aria-current="page">
+        <svg class="icon"><use href="./icons/icons.svg#icon-budget"></use></svg>
+        Budget
+      </a>
+      <a href="./category.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="./goal.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="./merchants.html" class="btn-icon">
+        <svg class="icon"><use href="./icons/icons.svg#icon-transactions"></use></svg>
+        Merchants
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <img src="./images/coinbear.png" alt="CoinBear logo" class="logo logo-large" />
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <h2>Pages</h2>
+      <ul class="navlist">
+        <li>
+          <a href="./account.html">
+            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="./icons/icons.svg#icon-account2"></use></svg>
+            Account
+          </a>
+        </li>
+        <li>
+          <a href="./transaction.html">
+            <svg class="icon"><use href="./icons/icons.svg#icon-account"></use></svg>
+            New Transaction
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <section class="grid stretch">
+      <a href="./index.html" class="crumb col-12">← Back to Dashboard</a>
+
+      <!-- Month header -->
+      <section class="card col-12 sm-full">
+        <header class="row">
+          <div class="row" style="gap:8px">
+            <a class="btn btn-soft" href="#" aria-label="Previous month">◀</a>
+            <h1 id="budget-month" style="margin:0">September 2025</h1>
+            <a class="btn btn-soft" href="#" aria-label="Next month">▶</a>
+          </div>
+          <a class="btn btn-accent" href="./transaction.html">＋ Add Transaction</a>
+        </header>
+        <p class="hint">Month-to-date totals are based on your <strong>manual accounts</strong>.</p>
+      </section>
+
+      <!-- KPI tiles -->
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Planned income</div>
+        <div id="budget-planned-income" class="kpi-value">$3,200</div>
+        <div class="hint">Optional target for the month</div>
+      </div>
+
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Planned expenses</div>
+        <div id="budget-planned-expenses" class="kpi-value">$2,900</div>
+        <div class="hint">Sum of category budgets</div>
+      </div>
+
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Planned balance</div>
+        <div id="budget-planned-balance" class="kpi-value">$300</div>
+        <div class="hint">planned income − planned expenses</div>
+      </div>
+
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Actual income (to date)</div>
+        <div id="budget-actual-income" class="kpi-value">$3,200</div>
+      </div>
+
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Actual expenses (to date)</div>
+        <div id="budget-actual-expenses" class="kpi-value">$2,850</div>
+      </div>
+
+      <div class="card kpi col-2 md-col-4 sm-full">
+        <div class="muted">Actual balance (to date)</div>
+        <div id="budget-actual-balance" class="kpi-value">$350</div>
+      </div>
+
+      <!-- Category Budgets table -->
+      <section class="card col-12 sm-full">
+        <header class="row">
+          <h2>Category Budgets — Planned vs Actual</h2>
+          <a class="btn btn-soft" href="./category.html">＋ New Category</a>
+        </header>
+        <table class="table" id="budget-category-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th class="t-right">Planned</th>
+              <th class="t-right">Actual</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Groceries</td><td class="t-right">$350</td><td class="t-right">$350</td><td><progress value="350" max="350" title="100%"></progress><div class="hint">100% used</div></td></tr>
+            <tr><td>Bills</td><td class="t-right">$450</td><td class="t-right">$420</td><td><progress value="420" max="450" title="93%"></progress><div class="hint">93% used</div></td></tr>
+            <tr><td>Personal</td><td class="t-right">$220</td><td class="t-right">$180</td><td><progress value="180" max="220" title="82%"></progress><div class="hint">82% used</div></td></tr>
+            <tr><td>Medical</td><td class="t-right">$120</td><td class="t-right">$95</td><td><progress value="95" max="120" title="79%"></progress><div class="hint">79% used</div></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Recent Transactions -->
+      <section class="card col-12 sm-full">
+        <header class="row">
+          <h2>Recent Transactions (Sep 2025)</h2>
+          <a class="btn btn-soft" href="./transaction.html">＋ Add Transaction</a>
+        </header>
+        <table class="table" id="budget-recent-tx">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Account</th>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Merchant</th>
+              <th class="t-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2025-09-21</td><td>Checking</td><td>Expense</td><td>Groceries</td><td>Trader Joe’s</td><td class="t-right">−$45.00</td></tr>
+            <tr><td>2025-09-20</td><td>Checking</td><td>Expense</td><td>Bills</td><td>PG&E</td><td class="t-right">−$120.00</td></tr>
+            <tr><td>2025-09-15</td><td>Checking</td><td>Income</td><td>Paycheck</td><td>Acme Co.</td><td class="t-right">+$1,600.00</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </section>
+  </main>
+  <script type="module" src="./scripts/theme.js"></script>
+
+</body>
+</html>

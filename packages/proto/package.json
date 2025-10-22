@@ -1,17 +1,31 @@
 {
   "name": "proto",
   "version": "1.0.0",
-  "description": "",
-  "main": "public/index.html",
+  "description": "Prototype workspace for custom Lit components using Mustang + Vite",
+  "type": "module",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server public -p 3000 -a 0.0.0.0"
+    "dev": "npx vite",
+    "build": "npx tsc && npx vite build",
+    "preview": "npx vite preview --port 5173",
+    "start": "http-server dist -p 3000"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vite",
+    "lit",
+    "mustang",
+    "typescript",
+    "web-components"
+  ],
+  "author": "Your Name",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "@calpoly/mustang": "^0.1.13",
+    "http-server": "^14.1.1",
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.11"
   }
 }

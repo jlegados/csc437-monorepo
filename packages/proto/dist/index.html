@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoinBear — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-BlM3wLXg.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-X6AbDqkA.css">
+</head>
+<body>
+
+  <!-- Header (Flex) -->
+  <header class="app-header">
+    <div class="app-left">
+      <img src="/assets/coinbear-B5J52QcQ.png" alt="CoinBear" class="logo" />
+      <div class="titles">
+        <h1 class="app-name">CoinBear</h1>
+        <div class="page-name">Dashboard</div>
+      </div>
+    </div>
+
+    <nav class="app-nav" aria-label="Primary">
+      <a href="/budget.html" class="btn-icon" aria-current="page">
+        <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-budget"></use></svg>
+        Budget
+      </a>
+      <a href="./category.html" class="btn-icon">
+        <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-categories"></use></svg>
+        Categories
+      </a>
+      <a href="./goal.html" class="btn-icon">
+        <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-savings"></use></svg>
+        Goals
+      </a>
+      <a href="./merchants.html" class="btn-icon">
+        <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-transactions"></use></svg>
+        Merchants
+      </a>
+    </nav>
+
+    <div class="app-user">
+      <span class="user-name">Hi, Julianne</span>
+
+      <!-- THEME TOGGLE -->
+      <label id="theme-toggle" class="row" style="gap:6px;cursor:pointer;align-items:center;margin-left:12px;">
+        <input id="darkmode-input" type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar card">
+      <img src="/assets/coinbear-B5J52QcQ.png" alt="CoinBear" class="logo logo-large" />
+
+      <!-- Quick Add (centered, dropdown) -->
+      <div class="quickadd-wrap">
+        <details class="quickadd">
+          <summary class="btn btn-accent">＋ Quick Add</summary>
+          <div class="menu">
+            <a href="./goal.html">New Goal</a>
+            <a href="./transaction.html">New Income</a>
+            <a href="./transaction.html">New Expense</a>
+          </div>
+        </details>
+      </div>
+
+      <ul class="navlist">
+        <li>
+          <a href="./account.html">
+            <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-account2"></use></svg>
+            Account
+          </a>
+        </li>
+        <li>
+          <a href="./transaction.html">
+            <svg class="icon"><use href="/assets/icons-DyS_dOYZ.svg#icon-account"></use></svg>
+            New Transaction
+          </a>
+        </li>
+      </ul>
+
+      <section class="card">
+        <h3>★ Goal</h3>
+        <figure class="goal">
+          <img src="/assets/ipad-zdlh2uep.jpg" alt="" class="goal-img" />
+          <figcaption>
+            <strong>iPad Air 6th Gen</strong>
+            <div class="muted">$500.00</div>
+            <progress value="2" max="100"></progress>
+            <div class="muted">2%</div>
+          </figcaption>
+        </figure>
+      </section>
+    </aside>
+
+    <!-- Main dashboard content -->
+    <section class="grid stretch">
+
+      <!-- KPIs -->
+      <div class="card kpi col-4 md-col-6 sm-full"> 
+        <div class="muted">Total income (this month)</div>
+        <div id="total-income" class="kpi-value">$3,200</div>
+        <div class="hint">Month-to-date totals based on manual accounts</div>
+      </div>
+    
+      <div class="card kpi col-4 md-col-6 sm-full"> 
+         <div class="muted">Total expenses (this month)</div>
+        <div id="total-expenses" class="kpi-value">$2,850</div>
+        <div class="hint">Month-to-date totals based on manual accounts</div>
+      </div>
+    
+      <div class="card kpi col-4 md-col-6 sm-full"> 
+        <div class="muted">Balance (this month)</div>
+        <div id="total-balance" class="kpi-value">$350</div>
+        <div class="hint">income − expenses</div>
+      </div>
+    
+      <!-- Full-width sections -->
+      <section class="card col-12">
+        <header class="row">
+          <h2>Expenses by Category</h2>
+          <a class="btn btn-soft" href="./category.html">＋ New Category</a>
+        </header>
+        <ul id="category-list" class="chip-list">
+          <li class="chip">Groceries <strong>$350</strong></li>
+          <li class="chip">Bills <strong>$420</strong></li>
+          <li class="chip">Personal <strong>$180</strong></li>
+          <li class="chip">Medical <strong>$95</strong></li>
+        </ul>
+      </section>
+    
+      <section class="card col-12">
+        <header class="row">
+          <h2>Wishlist</h2>
+          <a class="btn btn-soft" href="./goal.html">＋ New Wish</a>
+        </header>
+        <ul class="chip-list">
+          <li class="chip chip-soft">Weekend Trip <strong>$300</strong></li>
+          <li class="chip chip-soft">iPad Case <strong>$45</strong></li>
+        </ul>
+      </section>
+  
+    </section>
+  </main>
+
+  <!-- connect your theme logic -->
+</body>
+</html>

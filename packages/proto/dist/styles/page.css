@@ -1,0 +1,511 @@
+html { font-size: 16px; }
+
+body{
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(107,138,253,.12), transparent 60%),
+              radial-gradient(800px 500px at 110% 0%, rgba(255,215,215,.12), transparent 50%),
+              var(--color-background-page);
+  color: var(--color-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+h1, h2, h3,
+.section-title,
+.stat .value,
+.goal-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600; 
+}
+/* layout */
+.container{ 
+  max-width:var(--container);
+  margin:32px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns: 280px 1fr;
+  gap:24px;
+}
+
+/* sidebar */
+.sidebar{
+  background:var(--surface-1);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.logo{
+  width:84px;
+  height:84px;
+  display:block;
+  margin:6px auto 10px
+}
+
+.logo-large{
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))
+}
+.sidebar h2{
+  margin:10px 0 8px;
+  font-size:1.15rem;
+}
+.navlist{list-style:none;margin:8px 0;padding:0;display:grid;gap:8px}
+.navlist a{
+  display:flex;
+  padding:8px 10px;
+  border-radius:12px;
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(255,255,255,.35);
+  border:1px solid var(--line);
+  gap: 0.50rem;
+  align-items: center;
+}
+.navlist a:hover{background:rgba(255,255,255,.55)}
+
+/* quick add */
+.quickadd > summary{
+  cursor:pointer;
+  display:inline-block;
+  background:var(--accent);
+  color:var(--accent-ink);
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.05);
+  box-shadow:var(--shadow-soft);
+}
+.quickadd[open] > summary{filter:brightness(.98)}
+.quickadd .menu{
+  margin-top:10px;
+  display:grid;
+  gap:6px;
+}
+.quickadd .menu a{
+  background:var(--accent-soft);
+  color:var(--accent-ink);
+  border-radius:10px;
+  padding:8px 10px;
+  text-decoration:none;
+  border:1px solid rgba(0,0,0,.06);
+}
+.quickadd .menu a:hover{filter:brightness(.98)}
+
+.quickadd-wrap{
+  display:flex;
+  justify-content:center;   /* centers the button */
+  margin: .1rem 0;
+}
+
+
+/* grid area for main content */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:24px;
+  align-content:start;
+}
+.stretch{align-self:start}
+
+/* cards */
+.card{
+  background:var(--surface-1);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+.card header.row{margin-bottom:6px}
+.span-3{grid-column:1 / -1}
+
+/* rows / stacks */
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.stack{display:grid;gap:12px}
+
+/* KPIs */
+.kpi .muted{color:var(--text-muted);font-weight:500}
+.kpi .kpi-value{
+  font-size:1.8rem;
+  font-weight:800;
+  letter-spacing:.2px;
+  margin-top:6px;
+}
+.hint{color:var(--text-muted);font-size:.8rem;margin-top:6px}
+
+/* chips */
+.chip-list{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 2px}
+.chip{
+  background:var(--surface-2);
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.chip strong{font-weight:800}
+.chip-soft{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* buttons */
+.btn{
+  appearance:none;border:0;cursor:pointer;
+  padding:8px 12px;border-radius:12px;font-weight:600;
+  background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  display: inline-flex;          /* was inline */
+  align-items: center;
+  white-space: nowrap;
+}
+.btn:hover{filter:brightness(.98)}
+.btn-accent{background:var(--accent);color:var(--accent-ink)}
+.btn-soft{background:var(--surface-3)}
+
+/* goal widget */
+.goal{display:flex;gap:12px;align-items:center}
+.goal-img{width:56px;height:56px;object-fit:cover;border-radius:12px;background:#fff;border:1px solid var(--line)}
+progress{
+  width:100%;height:10px;border:none;appearance:none;
+  background:rgba(255,255,255,.6);border-radius:999px;overflow:hidden;
+}
+progress::-webkit-progress-bar{background:rgba(255,255,255,.6)}
+progress::-webkit-progress-value{background:var(--accent);}
+
+/* tables (account page) */
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{
+  padding:10px 8px;border-bottom:1px solid var(--line);font-size:.95rem
+}
+.t-right{text-align:right}
+
+/* badges & crumbs */
+.badge{
+  font-size:.75rem;font-weight:700;
+  padding:.2rem .6rem;border-radius:999px;
+  background:var(--surface-3);border:1px solid var(--line);
+}
+.crumb{display:inline-block;margin-bottom:10px;color:var(--text-muted);text-decoration:none}
+.crumb:hover{text-decoration:underline}
+
+/* headers inside cards */
+.card h2{margin:0 0 8px;font-size:1.2rem}
+
+/* responsive */
+@media (max-width: 980px){
+  .container{grid-template-columns:1fr;gap:18px}
+  .grid{grid-template-columns:1fr}
+  .span-3{grid-column:auto}
+}
+
+/* SVG icons */
+svg.icon {
+  width: 24px;
+  height: 24px;
+  display: block;          
+  flex: 0 0 24px;
+  fill: currentColor;
+}
+
+
+/* ===== Header (Flex layout) ===== */
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:12px 16px; margin:0 auto 16px;
+  max-width:var(--container); color:var(--text);
+}
+
+.app-left{ display:flex; align-items:center; gap:12px; }
+.titles{ display:grid; line-height:1; }
+.app-name{ font-size:1.2rem; margin:0; }
+.page-name{ color: var(--text-muted); font-size:.875rem; }
+
+.app-header .logo{
+  width:40px; height:40px; border-radius:10px;
+  background:none; border:0;
+  display:block;
+}
+
+.app-nav{ display:flex; gap:12px; flex-wrap:wrap; }
+.app-nav a{
+  text-decoration:none; color:var(--text);
+  background:var(--surface-2); border:1px solid var(--line);
+  padding:6px 10px; border-radius:999px;
+}
+.app-nav a:hover{ background:var(--surface-3); }
+
+.app-user{ display:flex; align-items:center; gap:10px; }
+.user-name{ font-weight:600; }
+
+/* Small screens */
+@media (max-width:640px){
+  .app-header{ align-items:flex-start; }
+  .app-user{ margin-left:auto; }
+}
+
+
+/* Bubble-style nav buttons */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;                     /* space between icon and text */
+  padding: 6px 14px;            /* smaller padding to shrink height */
+  border-radius: 999px;         /* keeps the bubble shape */
+  background: var(--surface-3);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.95rem;           /* makes text consistent */
+  line-height: 1.1;
+  transition: background 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: var(--surface-2);
+}
+
+/* Icon sizing inside */
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+  opacity: 0.85;
+}
+
+/* ---- Grid system ---- */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap:24px;
+  align-content:start;
+}
+
+/* column span utilities */
+.col-1{grid-column:span 1}
+.col-2{grid-column:span 2}
+.col-3{grid-column:span 3}
+.col-4{grid-column:span 4}
+.col-5{grid-column:span 5}
+.col-6{grid-column:span 6}
+.col-7{grid-column:span 7}
+.col-8{grid-column:span 8}
+.col-9{grid-column:span 9}
+.col-10{grid-column:span 10}
+.col-11{grid-column:span 11}
+.col-12{grid-column:span 12}
+
+/* responsive helpers */
+@media (max-width: 1060px){
+  .md-col-6{grid-column:span 6}
+  .md-col-4{grid-column:span 4}
+  .md-col-3{grid-column:span 3}
+  .md-col-12{grid-column:span 12}
+}
+@media (max-width: 700px){
+  .sm-full{grid-column:1 / -1}
+}
+
+/* ===== DARK MODE POLISH ===== */
+
+/* Subtle vignette / spotlight so content stands out */
+body.dark-mode {
+  background:
+    radial-gradient(900px 480px at 35% -10%, rgba(156,192,255,.10), transparent 60%),
+    radial-gradient(700px 420px at 110% 0%, rgba(255,180,180,.10), transparent 55%),
+    var(--color-background-page);
+}
+
+/* Cards: crisper edge + soft lift */
+body.dark-mode .card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-1) 96%, #fff 4%),
+    var(--surface-1)
+  );
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* KPI contrast and text */
+body.dark-mode .kpi .muted {
+  color: color-mix(in oklab, var(--text-muted) 85%, #fff 15%);
+}
+body.dark-mode .kpi .kpi-value {
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* ---------- Pills, Chips, and Buttons ---------- */
+
+body.dark-mode .chip,
+body.dark-mode .chip-soft,
+body.dark-mode .card .btn.btn-soft,
+body.dark-mode .app-nav .btn-icon {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  padding: 8px 12px;
+  transition: all 0.15s ease;
+}
+
+/* Softer accent variant (e.g., Wishlist chips) */
+body.dark-mode .chip-soft {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--accent-soft) 92%, #fff 8%),
+    var(--accent-soft)
+  );
+}
+
+/* Header action pills (+ New Category / + New Wish) */
+body.dark-mode .card header .btn.btn-soft {
+  padding: 8px 14px;
+  font-weight: 700;
+}
+
+/* Hover + active states */
+body.dark-mode .chip:hover,
+body.dark-mode .chip-soft:hover,
+body.dark-mode .card .btn.btn-soft:hover,
+body.dark-mode .app-nav .btn-icon:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
+}
+body.dark-mode .chip:active,
+body.dark-mode .chip-soft:active,
+body.dark-mode .card .btn.btn-soft:active,
+body.dark-mode .app-nav .btn-icon:active {
+  transform: translateY(0);
+}
+
+body.dark-mode .chip strong {
+  font-weight: 800;
+  color: #fff;
+}
+
+/* ---------- Text Color Unification ---------- */
+
+/* Headings inside cards (Goal, Expenses, Wishlist, etc.) */
+body.dark-mode .card h2,
+body.dark-mode .card h3,
+body.dark-mode section.card header h2,
+body.dark-mode .goal strong {
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* General card text */
+body.dark-mode .card,
+body.dark-mode .card .muted,
+body.dark-mode .card figcaption,
+body.dark-mode .chip-list,
+body.dark-mode .goal {
+  color: #e8ebf5 !important;
+}
+
+/* Muted subtext */
+body.dark-mode .muted {
+  opacity: 0.85;
+  font-weight: 500;
+  color: #d7dbea !important;
+}
+
+/* Ensure header buttons + titles stay white */
+body.dark-mode .card header.row h2,
+body.dark-mode .card header.row .btn-soft {
+  color: #fff !important;
+}
+
+/* Goal section refinement */
+body.dark-mode .goal .muted {
+  opacity: 0.85;
+  font-weight: 500;
+  color: #d7dbea !important;
+}
+
+/* Category & Wishlist cards edge highlight */
+body.dark-mode .card.col-12 {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* -------------------------------
+   Merchant Detail – dark mode fix
+--------------------------------*/
+body.dark-mode .card h1,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode header.row h1,
+body.dark-mode header.row h2 {
+  color: #fff !important;
+}
+
+/* Fix arrow buttons ◀ ▶ */
+body.dark-mode .btn.btn-soft {
+  color: #fff !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark-mode .btn.btn-soft:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
+}
+
+/* Merchant month label text */
+body.dark-mode #merchant-month {
+  color: #fff !important;
+}
+
+/* -------------------------------------------------------
+   UNIVERSAL DARK MODE TEXT FIX — headers, months, labels
+--------------------------------------------------------*/
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode header strong,
+body.dark-mode [id*="month"] {
+  color: #fff !important;
+}
+
+/* keep soft buttons visible */
+body.dark-mode .btn.btn-soft {
+  color: #fff !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
+    var(--surface-2)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark-mode .btn.btn-soft:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
+    var(--surface-3)
+  );
+}
