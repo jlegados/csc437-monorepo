@@ -1,17 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
+    "target": "ESNext",
     "module": "ESNext",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "noEmit": true,
-    "isolatedModules": true,
     "skipLibCheck": true,
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "types": ["vite/client"]
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "index.html"]
+  "include": ["src"]
 }
