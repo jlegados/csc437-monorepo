@@ -1,7 +1,5 @@
-import reset from "./styles/reset.css";
 import { html, css, LitElement, nothing } from "lit";
 
-// simple currency formatter
 function fmtCurrency(n?: number) {
   if (n == null || Number.isNaN(n)) return "—";
   return n < 0 ? `−$${Math.abs(n).toFixed(2)}` : `$${n.toFixed(2)}`;
@@ -18,7 +16,6 @@ export class MerchantDetailElement extends LitElement {
     lastDate:      { type: String, attribute: "last-date" }
   } as const;
 
-  // Type hints for TS
   logoSrc?: string;
   websiteHref?: string;
   phone?: string;

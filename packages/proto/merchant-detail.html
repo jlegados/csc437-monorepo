@@ -3,94 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CoinBear — Merchant</title>
+    <title>CoinBear — Merchant Detail</title>
 
-    <!-- styles from /public -->
-    <link rel="stylesheet" href="/styles/reset.css" />
-    <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/page.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   </head>
-
   <body>
-    <header class="app-header">
-      <div class="app-left">
-        <img src="/images/coinbear.png" alt="CoinBear" class="logo" />
-        <div class="titles">
-          <h1 class="app-name">CoinBear</h1>
-          <div class="page-name">Merchant Detail</div>
-        </div>
-      </div>
-
-      <nav class="app-nav" aria-label="Primary">
-        <a href="/budget.html" class="btn-icon" aria-current="page">
-          <svg class="icon"><use href="/icons/icons.svg#icon-budget"></use></svg>
-          Budget
-        </a>
-        <a href="/category.html" class="btn-icon">
-          <svg class="icon"><use href="/icons/icons.svg#icon-categories"></use></svg>
-          Categories
-        </a>
-        <a href="/goal.html" class="btn-icon">
-          <svg class="icon"><use href="/icons/icons.svg#icon-savings"></use></svg>
-          Goals
-        </a>
-        <a href="/merchants.html" class="btn-icon">
-          <svg class="icon"><use href="/icons/icons.svg#icon-transactions"></use></svg>
-          Merchants
-        </a>
-      </nav>
-    </header>
 
     <main class="container">
-      <aside class="sidebar card">
-        <img src="/images/coinbear.png" alt="CoinBear" class="logo logo-large" />
-        <div class="quickadd-wrap">
-          <details class="quickadd">
-            <summary class="btn btn-accent">＋ Quick Add</summary>
-            <div class="menu">
-              <a href="/goal.html">New Goal</a>
-              <a href="/transaction.html">New Income</a>
-              <a href="/transaction.html">New Expense</a>
-            </div>
-          </details>
-        </div>
-
-        <h2>Pages</h2>
-        <ul class="navlist">
-          <li>
-            <a href="/account.html">
-              <svg class="icon"><use href="/icons/icons.svg#icon-account2"></use></svg>
-              Account
-            </a>
-          </li>
-          <li>
-            <a href="/transaction.html">
-              <svg class="icon"><use href="/icons/icons.svg#icon-account"></use></svg>
-              New Transaction
-            </a>
-          </li>
-        </ul>
-      </aside>
-
       <section class="grid stretch">
         <a href="/merchants.html" class="crumb col-12">← Back to Merchants</a>
 
-        <merchant-detail
-          id="md"
-          logo-src="/images/merchants/traderjoes.png"
-          website-href="https://www.traderjoes.com"
-          phone="+1 (800) 123-4567"
-          category="Groceries"
-          monthly-spend="95.00"
-          transactions="2"
-          last-date="2025-09-21">
-          <span slot="name">Trader Joe’s</span>
-          <span slot="address">3970 Broad St, San Luis Obispo, CA</span>
-          <span slot="notes">Neighborhood grocery · accepts Apple Pay</span>
+        <merchant-detail id="md">
+          <span slot="name"></span>
+          <span slot="address"></span>
+          <span slot="notes"></span>
         </merchant-detail>
 
         <section class="card col-8 md-col-8 sm-full">
@@ -101,112 +33,95 @@
           <table class="table" id="merchant-table">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Account</th>
-                <th>Category</th>
-                <th class="t-right">Amount</th>
+                <th>Date</th><th>Account</th><th>Category</th><th class="t-right">Amount</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>2025-09-21</td>
-                <td>Checking</td>
-                <td>Groceries</td>
-                <td class="t-right">−$45.00</td>
-              </tr>
-              <tr>
-                <td>2025-09-12</td>
-                <td>Checking</td>
-                <td>Groceries</td>
-                <td class="t-right">−$50.00</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </section>
 
         <section class="card col-4 md-col-8 sm-full">
           <h2>Related</h2>
           <ul class="navlist">
-            <li><a href="/transaction-category.html?c=Groceries">See Groceries category</a></li>
+            <li><a id="related-link" href="#">See category</a></li>
           </ul>
         </section>
       </section>
     </main>
 
-    <!-- theme + component -->
-    <script type="module" src="/scripts/theme.js"></script>
+    <!-- component class -->
     <script type="module" src="/src/merchant-detail.ts"></script>
 
-    <!-- simple data switcher by ?m= -->
+    <!-- loader -->
     <script type="module">
-      const data = {
-        "trader-joes": {
-          name: "Trader Joe’s",
-          logo: "/images/merchants/traderjoes.png",
-          category: "Groceries",
-          website: "https://www.traderjoes.com",
-          phone: "+1 (800) 123-4567",
-          address: "3970 Broad St, San Luis Obispo, CA",
-          monthly: 95.0,
-          tx: 2,
-          last: "2025-09-21",
-          notes: "Neighborhood grocery · accepts Apple Pay",
-        },
-        starbucks: {
-          name: "Starbucks",
-          logo: "/icons/noun-point-of-service-4256209.svg",
-          category: "Coffee",
-          website: "https://www.starbucks.com",
-          phone: "+1 (800) 782-7282",
-          address: "Downtown, San Luis Obispo, CA",
-          monthly: 28.5,
-          tx: 3,
-          last: "2025-09-18",
-          notes: "Daily caffeine run ☕︎",
-        },
-        pge: {
-          name: "PG&E",
-          logo: "/icons/noun-graph-4257817.svg",
-          category: "Utilities",
-          website: "https://www.pge.com",
-          phone: "+1 (800) 743-5000",
-          address: "Online billing",
-          monthly: 120.0,
-          tx: 1,
-          last: "2025-09-07",
-          notes: "Electric service",
-        },
-        amazon: {
-          name: "Amazon",
-          logo: "/icons/noun-folder-4257816.svg",
-          category: "Shopping",
-          website: "https://www.amazon.com",
-          phone: "",
-          address: "Online orders",
-          monthly: 64.99,
-          tx: 2,
-          last: "2025-09-16",
-          notes: "Prime orders",
-        },
-      };
+      const slug = (s) => s.toLowerCase()
+        .replace(/['’]/g, '')
+        .replace(/&/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
 
       const params = new URLSearchParams(location.search);
-      const key = params.get("m") || "trader-joes";
-      const d = data[key];
-      const el = document.getElementById("md");
+      const wanted = params.get("m");      
 
-      if (el && d) {
-        el.setAttribute("logo-src", d.logo);
-        el.setAttribute("website-href", d.website);
-        el.setAttribute("phone", d.phone);
-        el.setAttribute("category", d.category);
-        el.setAttribute("monthly-spend", String(d.monthly));
-        el.setAttribute("transactions", String(d.tx));
-        el.setAttribute("last-date", d.last);
-        el.querySelector('[slot="name"]').textContent = d.name;
-        el.querySelector('[slot="address"]').textContent = d.address;
-        el.querySelector('[slot="notes"]').textContent = d.notes;
+      function fmt(amount) {
+        const abs = Math.abs(amount).toFixed(2);
+        return amount < 0 ? `−$${abs}` : `$${abs}`;
       }
+
+      async function load() {
+        const res = await fetch("/data/merchants.json", { cache: "no-cache" });
+        const text = await res.text();
+        if (!res.ok || text.trim().startsWith("<")) {
+          throw new Error("Failed to fetch merchants.json (got HTML or HTTP error).");
+        }
+        const list = JSON.parse(text);
+
+        // pick merchant by id/slug
+        let m = list.find(x => (x.id ?? slug(x.name)) === wanted) ?? list[0];
+        if (!m) throw new Error("No merchants available.");
+
+        const el = document.getElementById("md");
+        el.setAttribute("logo-src", m.logoSrc ?? "");
+        el.setAttribute("website-href", m.websiteHref ?? "");
+        el.setAttribute("phone", m.phone ?? "");
+        el.setAttribute("category", m.category ?? "");
+        el.setAttribute("monthly-spend", String(m.monthlySpend ?? 0));
+        el.setAttribute("transactions", String(Array.isArray(m.transactions) ? m.transactions.length : (m.transactions ?? 0)));
+        el.setAttribute("last-date", m.lastDate ?? "");
+        el.querySelector('[slot="name"]').textContent = m.name ?? "";
+        el.querySelector('[slot="address"]').textContent = m.address ?? "";
+        el.querySelector('[slot="notes"]').textContent = m.notes ?? "";
+
+        const catLink = document.getElementById("related-link");
+        if (catLink && m.category) {
+          catLink.textContent = `See ${m.category} category`;
+          catLink.href = `/transaction-category.html?c=${encodeURIComponent(m.category)}`;
+        }
+
+        const tbody = document.querySelector("#merchant-table tbody");
+        tbody.innerHTML = "";
+        if (Array.isArray(m.transactions) && m.transactions.length) {
+          for (const t of m.transactions) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${t.date ?? ""}</td>
+              <td>${t.account ?? ""}</td>
+              <td>${t.category ?? ""}</td>
+              <td class="t-right">${fmt(t.amount ?? 0)}</td>`;
+            tbody.appendChild(tr);
+          }
+        } else {
+          tbody.innerHTML = `<tr><td colspan="4" class="muted">No transactions found.</td></tr>`;
+        }
+      }
+
+      load().catch(err => {
+        console.error(err);
+        document.body.insertAdjacentHTML("beforeend",
+          `<p role="alert">Error loading merchant data: ${err.message}</p>`);
+      });
     </script>
+      <script type="module" src="/scripts/theme.js"></script>
+
   </body>
 </html>

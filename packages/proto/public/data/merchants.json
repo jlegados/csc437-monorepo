@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Trader Joe’s",
+    "logoSrc": "/images/merchants/traderjoes.png",
+    "websiteHref": "https://www.traderjoes.com",
+    "phone": "+1 (800) 123-4567",
+    "category": "Groceries",
+    "monthlySpend": 95.0,
+    "transactions": 2,
+    "lastDate": "2025-09-21",
+    "notes": "Neighborhood grocery · accepts Apple Pay"
+  },
+  {
+    "name": "Starbucks",
+    "logoSrc": "/icons/noun-point-of-service-4256209.svg",
+    "websiteHref": "https://www.starbucks.com",
+    "phone": "+1 (800) 782-7282",
+    "category": "Coffee",
+    "monthlySpend": 28.5,
+    "transactions": 3,
+    "lastDate": "2025-09-18",
+    "notes": "Daily caffeine run ☕︎"
+  },
+  {
+    "name": "PG&E",
+    "logoSrc": "/icons/noun-graph-4257817.svg",
+    "websiteHref": "https://www.pge.com",
+    "phone": "+1 (800) 743-5000",
+    "category": "Utilities",
+    "monthlySpend": 120.75,
+    "transactions": 1,
+    "lastDate": "2025-09-07",
+    "notes": "Electric service"
+  },
+  {
+    "name": "Amazon",
+    "logoSrc": "/icons/noun-folder-4257816.svg",
+    "websiteHref": "https://www.amazon.com",
+    "phone": "",
+    "category": "Shopping",
+    "monthlySpend": 245.99,
+    "transactions": 4,
+    "lastDate": "2025-09-16",
+    "notes": "Prime orders"
+  }
+]
+

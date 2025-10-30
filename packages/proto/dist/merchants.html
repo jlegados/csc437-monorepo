@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CoinBear — Merchants</title>
 
-  <link rel="stylesheet" href="/styles/reset.css" />
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/page.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/page.css" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
- 
-  <script type="module" crossorigin src="/assets/merchants-zGuVnxUP.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <script type="module" crossorigin src="/assets/merchants-Dz1huGC2.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/assets/lit-element-DMCH56eX.js">
+  <link rel="modulepreload" crossorigin href="/assets/lit-element-CQ1JZ35d.js">
 </head>
 <body>
   <!-- Header -->
@@ -24,12 +28,12 @@
       <img src="/images/coinbear.png" alt="CoinBear" class="logo" />
       <div class="titles">
         <h1 class="app-name">CoinBear</h1>
-        <div class="page-name">Merchant</div>
+        <div class="page-name">Merchants</div>
       </div>
     </div>
 
     <nav class="app-nav" aria-label="Primary">
-      <a href="/budget.html" class="btn-icon" aria-current="page">
+      <a href="/budget.html" class="btn-icon">
         <svg class="icon"><use href="/icons/icons.svg#icon-budget"></use></svg>
         Budget
       </a>
@@ -41,7 +45,7 @@
         <svg class="icon"><use href="/icons/icons.svg#icon-savings"></use></svg>
         Goals
       </a>
-      <a href="/merchants.html" class="btn-icon">
+      <a href="/merchants.html" class="btn-icon" aria-current="page">
         <svg class="icon"><use href="/icons/icons.svg#icon-transactions"></use></svg>
         Merchants
       </a>
@@ -49,6 +53,7 @@
   </header>
 
   <main class="container">
+    <!-- Sidebar -->
     <aside class="sidebar card">
       <img src="/images/coinbear.png" alt="CoinBear" class="logo logo-large" />
       <div class="quickadd-wrap">
@@ -66,7 +71,7 @@
       <ul class="navlist">
         <li>
           <a href="/account.html">
-            <svg class="icon" preserveAspectRatio="xMidYMid meet"><use href="/icons/icons.svg#icon-account2"></use></svg>
+            <svg class="icon"><use href="/icons/icons.svg#icon-account2"></use></svg>
             Account
           </a>
         </li>
@@ -79,7 +84,7 @@
       </ul>
     </aside>
 
-    <!-- Main -->
+    <!-- Main Section -->
     <section class="grid stretch">
       <a href="/index.html" class="crumb col-12 sm-full">← Back to Dashboard</a>
 
@@ -92,25 +97,16 @@
         </div>
       </header>
 
-      <!-- You can keep the simple list… -->
       <section class="card col-8 md-col-8 sm-full">
-        <p class="hint">All merchants you’ve spent money at this month. Click a merchant to view details and transactions.</p>
-        <ul class="navlist" id="merchant-list">
-          <li><a href="/merchant-detail.html?m=trader-joes">Trader Joe’s <span class="badge">-$95.00</span></a></li>
-          <li><a href="/merchant-detail.html?m=starbucks">Starbucks <span class="badge">-$28.50</span></a></li>
-          <li><a href="/merchant-detail.html?m=pge">PG&amp;E <span class="badge">-$120.00</span></a></li>
-          <li><a href="/merchant-detail.html?m=amazon">Amazon <span class="badge">-$64.99</span></a></li>
-        </ul>
+        <merchant-list src="./data/merchants.json"></merchant-list>
       </section>
-
-      <!-- …or convert to <merchant-card> later if you want the fancy tiles -->
 
       <section class="card col-4 md-col-4 sm-full">
         <h2>Totals</h2>
         <div class="row">
           <div>
             <div class="muted">Total spent across merchants (month)</div>
-            <div id="merchants-total" class="kpi-value">-$308.49</div>
+            <div id="merchants-total" class="kpi-value">−$490.24</div>
           </div>
           <a class="btn btn-accent" href="/transaction.html">＋ Add Transaction</a>
         </div>
