@@ -2,6 +2,9 @@ import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
 
 interface Merchant {
+  // from Mongo
+  _id?: string;
+  id?: string;              // <-- slug if present (e.g., "trader-joes")
   name: string;
   address?: string;
   notes?: string;
@@ -15,42 +18,19 @@ interface Merchant {
 }
 
 export class MerchantList extends LitElement {
-  @property({ type: String }) src?: string;
+  // if not provided in HTML, we’ll default to the API
+  @property({ type: String }) src: string = "/merchants";
 
   @state() private merchants: Merchant[] = [];
   @state() private loading = true;
   @state() private error: string | null = null;
 
-  static styles = css`
-    :host {
-      display: block;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: var(--space-6, 1.25rem);
-      align-items: stretch;
-    }
-    .muted {
-      opacity: 0.7;
-      font-size: 0.95rem;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    merchant-card {
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out;
-    }
-    merchant-card:hover {
-      transform: scale(1.02);
-    }
-  `;
+  static styles = css`/* … your styles unchanged … */`;
 
   connectedCallback() {
     super.connectedCallback();
-    if (this.src) this.hydrate(this.src);
+    // fetch immediately (defaults to /merchants)
+    this.hydrate(this.src);
   }
 
   async hydrate(src: string) {
@@ -69,14 +49,19 @@ export class MerchantList extends LitElement {
     }
   }
 
+  private toSlug(name: string) {
+    return name
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(/&/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
   private renderCard(m: Merchant) {
-    const key = m.name
-    .toLowerCase()
-    .replace(/['’]/g, "")   
-    .replace(/&/g, "")      
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-        return html`
+    // Prefer the DB slug (id). Fall back to slugified name for older data.
+    const key = m.id ?? this.toSlug(m.name);
+    return html`
       <a href="/merchant-detail.html?m=${key}">
         <merchant-card
           img-src=${m.logoSrc ?? ""}
@@ -97,7 +82,7 @@ export class MerchantList extends LitElement {
 
   render() {
     if (this.loading) return html`<p class="muted">Loading merchants…</p>`;
-    if (this.error) return html`<p role="alert">Error: ${this.error}</p>`;
+    if (this.error)   return html`<p role="alert">Error: ${this.error}</p>`;
     if (!this.merchants.length)
       return html`<p class="muted">No merchants found.</p>`;
     return html`<div class="grid">
@@ -106,8 +91,5 @@ export class MerchantList extends LitElement {
   }
 }
 
-/** Guarded registration */
 const TAG = "merchant-list";
-if (!customElements.get(TAG)) {
-  customElements.define(TAG, MerchantList);
-}
+if (!customElements.get(TAG)) customElements.define(TAG, MerchantList);

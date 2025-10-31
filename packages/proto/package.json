@@ -22,7 +22,8 @@
   "dependencies": {
     "@calpoly/mustang": "^0.1.13",
     "http-server": "^14.1.1",
-    "lit": "^3.3.1"
+    "lit": "^3.3.1",
+    "mongodb": "^6.20.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
