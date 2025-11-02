@@ -11,7 +11,7 @@ const MerchantSchema = new Schema<Merchant>(
     category:      { type: String, trim: true },
     monthlySpend:  { type: Number },
     transactions:  { type: Number },
-    lastDate:      { type: Date },     // Mongoose will cast ISO strings
+    lastDate:      { type: Date },   // ISO string will be cast
     notes:         { type: String }
   },
   { collection: "cb_merchants" }
@@ -19,17 +19,35 @@ const MerchantSchema = new Schema<Merchant>(
 
 const MerchantModel = model<Merchant>("Merchant", MerchantSchema);
 
-// List all
+/** List all */
 function index(): Promise<Merchant[]> {
   return MerchantModel.find().lean();
 }
 
-// Get by slug if present, otherwise by exact name
 async function get(key: string): Promise<Merchant | null> {
-  // try id first (slug), fall back to name
   const byId = await MerchantModel.findOne({ id: key }).lean();
   if (byId) return byId;
   return MerchantModel.findOne({ name: key }).lean();
 }
 
-export default { index, get };
+function create(json: Merchant): Promise<Merchant> {
+  const doc = new MerchantModel(json);
+  return doc.save().then((d) => d.toObject() as Merchant);
+}
+
+
+function update(id: string, patch: Partial<Merchant>): Promise<Merchant | null> {
+  return MerchantModel.findOneAndUpdate({ id }, patch, {
+    new: true,            // return updated doc
+    runValidators: true,  // validate against schema
+  })
+    .lean()
+    .exec();
+}
+
+async function remove(id: string): Promise<void> {
+  const deleted = await MerchantModel.findOneAndDelete({ id }).exec();
+  if (!deleted) throw `${id} not deleted`;
+}
+
+export default { index, get, create, update, remove };
