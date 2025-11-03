@@ -1,13 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
+import { Observer, Auth } from "@calpoly/mustang";
 
-interface Merchant {
-  // from Mongo
+type Merchant = {
   _id?: string;
-  id?: string;              // <-- slug if present (e.g., "trader-joes")
+  id?: string;              // slug
   name: string;
-  address?: string;
-  notes?: string;
   logoSrc?: string;
   websiteHref?: string;
   phone?: string;
@@ -15,81 +13,95 @@ interface Merchant {
   monthlySpend?: number;
   transactions?: number;
   lastDate?: string;
-}
+  notes?: string;
+};
 
-export class MerchantList extends LitElement {
-  // if not provided in HTML, we’ll default to the API
-  @property({ type: String }) src: string = "/merchants";
+export class MerchantListElement extends LitElement {
+  static styles = css`
+    :host { display: block; }
+    .grid { display: grid; gap: 12px; }
+  `;
 
-  @state() private merchants: Merchant[] = [];
-  @state() private loading = true;
-  @state() private error: string | null = null;
+  @property({ reflect: true }) src?: string;
 
-  static styles = css`/* … your styles unchanged … */`;
+  @state() merchants: Merchant[] = [];
+  @state() loading = false;
+  @state() error?: string;
+
+  // --- AUTH OBSERVER + USER
+  private _authObserver = new Observer<Auth.Model>(this, "blazing:auth");
+  private _user?: Auth.User;
 
   connectedCallback() {
     super.connectedCallback();
-    // fetch immediately (defaults to /merchants)
-    this.hydrate(this.src);
+    this._authObserver.observe((auth: Auth.Model) => {
+      this._user = auth.user;
+      // If already have a URL and we just logged in, hydrate now.
+      if (this.src && this._user?.authenticated && this.merchants.length === 0) {
+        this.hydrate(this.src);
+      }
+    });
   }
 
-  async hydrate(src: string) {
+  // Build Authorization header when authenticated
+  get authorization(): HeadersInit | undefined {
+    return this._user?.authenticated
+      ? {
+          Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`
+        }
+      : undefined;
+  }
+
+  // Re-hydrate when src changes
+  updated(changed: Map<string, unknown>) {
+    if (changed.has("src") && this.src) {
+      this.hydrate(this.src);
+    }
+  }
+
+  render() {
+    if (this.loading) return html`<p>Loading…</p>`;
+    if (this.error) return html`<p class="error">${this.error}</p>`;
+    return html`
+      <div class="grid">
+        ${this.merchants.map(
+          (m) => html`
+            <merchant-card
+              name=${m.name}
+              .logoSrc=${m.logoSrc}
+              .websiteHref=${m.websiteHref}
+              .notes=${m.notes}
+              .category=${m.category}
+              .monthlySpend=${m.monthlySpend}
+              .transactions=${m.transactions}
+              .lastDate=${m.lastDate}
+            ></merchant-card>
+          `
+        )}
+      </div>
+    `;
+  }
+
+  async hydrate(url: string) {
     this.loading = true;
-    this.error = null;
+    this.error = undefined;
     try {
-      const res = await fetch(src);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      this.merchants = Array.isArray(json) ? (json as Merchant[]) : [];
-    } catch (e: any) {
-      this.error = e?.message ?? String(e);
-      this.merchants = [];
+      const res = await fetch(url, {
+        headers: this.authorization as HeadersInit
+      });
+      if (!res.ok) {
+        if (res.status === 401) throw new Error("Please log in to view merchants.");
+        if (res.status === 403) throw new Error("Session expired. Please log in again.");
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const data = (await res.json()) as Merchant[] | { items: Merchant[] };
+      this.merchants = Array.isArray(data) ? data : data.items ?? [];
+    } catch (err: any) {
+      this.error = err?.message ?? String(err);
     } finally {
       this.loading = false;
     }
   }
-
-  private toSlug(name: string) {
-    return name
-      .toLowerCase()
-      .replace(/['’]/g, "")
-      .replace(/&/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-  }
-
-  private renderCard(m: Merchant) {
-    // Prefer the DB slug (id). Fall back to slugified name for older data.
-    const key = m.id ?? this.toSlug(m.name);
-    return html`
-      <a href="/merchant-detail.html?m=${key}">
-        <merchant-card
-          img-src=${m.logoSrc ?? ""}
-          logo-src=${m.logoSrc ?? ""}
-          category=${m.category ?? ""}
-          address=${m.address ?? ""}
-          notes=${m.notes ?? ""}
-          phone=${m.phone ?? ""}
-          monthly-spend=${m.monthlySpend ?? 0}
-          transactions=${m.transactions ?? 0}
-          last-date=${m.lastDate ?? ""}
-        >
-          ${m.name}
-        </merchant-card>
-      </a>
-    `;
-  }
-
-  render() {
-    if (this.loading) return html`<p class="muted">Loading merchants…</p>`;
-    if (this.error)   return html`<p role="alert">Error: ${this.error}</p>`;
-    if (!this.merchants.length)
-      return html`<p class="muted">No merchants found.</p>`;
-    return html`<div class="grid">
-      ${this.merchants.map((m) => this.renderCard(m))}
-    </div>`;
-  }
 }
 
-const TAG = "merchant-list";
-if (!customElements.get(TAG)) customElements.define(TAG, MerchantList);
+customElements.define("merchant-list", MerchantListElement);

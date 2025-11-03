@@ -499,7 +499,7 @@ body.dark-mode .btn.btn-soft {
     color-mix(in oklab, var(--surface-2) 92%, #fff 8%),
     var(--surface-2)
   );
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 253, 253, 0.883);
 }
 
 body.dark-mode .btn.btn-soft:hover {
@@ -508,4 +508,59 @@ body.dark-mode .btn.btn-soft:hover {
     color-mix(in oklab, var(--surface-3) 92%, #fff 8%),
     var(--surface-3)
   );
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.user-menu .menu-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  display: none;
+  min-width: 160px;
+  padding: 8px 0;
+  border-radius: 10px;
+  background: var(--surface-2, #1f2330); /* darker tone for dark mode */
+  color: var(--color-text, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  z-index: 20;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.user-menu .menu-panel.open {
+  display: block;
+}
+
+.user-menu .menu-panel a {
+  display: block;
+  padding: 10px 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-text, #fff);
+  transition: background 0.2s;
+}
+
+.user-menu .menu-panel a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+
+
+.user-menu .menu-panel.open {
+  display: block;
+}
+
+.user-menu .menu-panel a {
+  display: block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: var(--color-text, #ece2e2);
+}
+
+.user-menu .menu-panel a:hover {
+  background: var(--surface-2, #eee);
 }
