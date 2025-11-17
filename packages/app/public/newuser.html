@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <h1>Sign up</h1>
+
+    <form id="register-form">
+      <p>
+        <label>
+          Username:
+          <input name="username" autocomplete="off" />
+        </label>
+      </p>
+      <p>
+        <label>
+          Password:
+          <input type="password" name="password" />
+        </label>
+      </p>
+      <p>
+        <button type="submit">Create account</button>
+      </p>
+    </form>
+
+    <p>
+      Already have an account?
+      <a href="/login.html">Back to login</a>.
+    </p>
+
+    <script>
+      const form = document.getElementById("register-form");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const data = new FormData(form);
+        const body = {
+          username: data.get("username"),
+          password: data.get("password"),
+        };
+
+        try {
+          const res = await fetch("/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+
+          if (!res.ok) {
+            const msg = await res.text();
+            alert("Registration failed: " + msg);
+            return;
+          }
+
+          const { token } = await res.json();
+          localStorage.setItem("token", token);
+          window.location.href = "/app";
+        } catch (err) {
+          console.error("Register error:", err);
+          alert("Register error (see console)");
+        }
+      });
+    </script>
+  </body>
+</html>

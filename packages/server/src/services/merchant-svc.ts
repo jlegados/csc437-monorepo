@@ -37,13 +37,19 @@ function create(json: Merchant): Promise<Merchant> {
 
 
 function update(id: string, patch: Partial<Merchant>): Promise<Merchant | null> {
-  return MerchantModel.findOneAndUpdate({ id }, patch, {
-    new: true,            // return updated doc
-    runValidators: true,  // validate against schema
-  })
+  return MerchantModel.findOneAndUpdate(
+    { id },
+    { $set: patch },
+    {
+      new: true,           
+      upsert: true,       
+      runValidators: true  
+    }
+  )
     .lean()
     .exec();
 }
+
 
 async function remove(id: string): Promise<void> {
   const deleted = await MerchantModel.findOneAndDelete({ id }).exec();
