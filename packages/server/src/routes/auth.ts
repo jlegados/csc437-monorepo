@@ -70,9 +70,14 @@ export function authenticateUser(
   if (!token) return res.status(401).end();
 
   jwt.verify(token, TOKEN_SECRET, (error, decoded) => {
-    if (decoded) next();
-    else res.status(403).end();
+    if (decoded && typeof decoded === "object") {
+      (req as any).user = (decoded as any).username;  // ← attach username
+      next();
+    } else {
+      res.status(403).end();
+    }
   });
+  
 }
 
 export default router;

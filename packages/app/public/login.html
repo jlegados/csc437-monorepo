@@ -59,6 +59,8 @@
           // store token for the SPA
           localStorage.setItem("token", token);
 
+          localStorage.setItem("username", body.username);
+
           // go to SPA
           window.location.href = "/app";
         } catch (err) {

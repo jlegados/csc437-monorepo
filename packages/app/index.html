@@ -1,27 +1,32 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CoinBear — SPA</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoinBear — SPA</title>
 
-  <link rel="stylesheet" href="/styles/reset.css" />
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/page.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-</head>
-<body>
-  <mu-history provides="coinbear:history">
-    <mu-auth provides="coinbear:auth" redirect="/login.html">
-      <article class="page">
-        <blazing-header></blazing-header>
-        <mu-switch></mu-switch>
-      </article>
-    </mu-auth>
-  </mu-history>
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <mu-history provides="coinbear:history">
+      <mu-auth provides="coinbear:auth" redirect="/login.html">
+        <mu-store provides="coinbear:model">
+          <article class="page">
+            <coinbear-header></coinbear-header>
+            <mu-switch></mu-switch>
+          </article>
+        </mu-store>
+      </mu-auth>
+    </mu-history>    
 
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
