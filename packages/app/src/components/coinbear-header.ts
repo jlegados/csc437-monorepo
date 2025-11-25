@@ -31,16 +31,13 @@ export class HeaderElement extends LitElement {
 
   private goToLogin(e: Event) {
     e.preventDefault();
-    window.location.href = "/login.html"; // force real navigation
+    window.location.href = "/login.html"; 
   }
 
   private logout(e: Event) {
     e.preventDefault();
-    // Clear all auth info
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-
-    // Redirect to login
     window.location.href = "/login.html";
   }
 
@@ -51,13 +48,14 @@ export class HeaderElement extends LitElement {
       <header>
         <div class="logo">CoinBear</div>
         <nav>
-          <a href="/app">Home</a>
-          <a href="/app/about">About</a>
-          <a href="/app/merchant/target">Target</a>
+          <!-- SPA navigation using mu-link -->
+          <a is="mu-link" href="/app">Home</a>
+          <a is="mu-link" href="/app/about">About</a>
+          <a is="mu-link" href="/app/merchant/target">Target</a>
 
           ${username
             ? html`
-                <a href="/app/profile/${username}">Profile</a>
+                <a is="mu-link" href="/app/profile/${username}">Profile</a>
                 <a href="#" @click=${this.logout}>Logout</a>
               `
             : html`
@@ -68,3 +66,5 @@ export class HeaderElement extends LitElement {
     `;
   }
 }
+
+customElements.define("coinbear-header", HeaderElement);

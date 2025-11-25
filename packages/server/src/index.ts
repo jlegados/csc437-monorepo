@@ -9,25 +9,20 @@ import path from "node:path";
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Absolute paths based on server/dist/index.js location
-// __dirname will be .../packages/server/dist at runtime
 const appPublicDir = path.resolve(__dirname, "../../app/public");
 const spaDistDir   = path.resolve(__dirname, "../../app/dist");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// 1) Serve login.html / newuser.html from app/public
 app.use(express.static(appPublicDir));
 
-// 2) Serve SPA assets (JS/CSS) from app/dist
 app.use(express.static(spaDistDir));
 
 app.use("/auth", auth);
 app.use("/api/profile", profileRoutes);
 app.use("/api/merchants", authenticateUser, merchantsApi);
 
-// 3) Any /app request gets the SPA index.html from dist
 app.use("/app", async (_req: Request, res: Response) => {
   const indexHtml = path.join(spaDistDir, "index.html");
   const html = await fs.readFile(indexHtml, "utf8");

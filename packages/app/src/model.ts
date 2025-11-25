@@ -1,13 +1,15 @@
-import type { Profile } from "server/models";
+import type { Profile as ServerProfile } from "server/models";
+
+export type Profile = ServerProfile;
 
 export interface Model {
-  profile: Profile | null;
+  profile?: Profile;
   profileStatus: "idle" | "loading" | "ready" | "error";
   profileError?: string;
 }
 
-// initial model for the store
 export const init: Model = {
-  profile: null,
+  profile: undefined,
   profileStatus: "idle",
+  profileError: undefined
 };

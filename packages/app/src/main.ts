@@ -1,32 +1,51 @@
-import { Auth, History, Switch, Store, define } from "@calpoly/mustang";
+import { Auth, History, Switch, Store, define, Form } from "@calpoly/mustang";
 import { html } from "lit";
 
-import { HeaderElement as CoinbearHeaderElement } from "./components/coinbear-header";
+import type { Msg } from "./message";
+import type { Model } from "./model";
+import update from "./update";
+import { init } from "./model";
+
+import "./components/coinbear-header";
 import "./views/home-view";
 import "./views/about-view";
 import "./views/merchant-view";
 import "./views/profile-view";
+import "./views/profile-edit";
 
-import type { Model } from "./model";
-import { init } from "./model";
-import type { Msg } from "./message";
-import update from "./update";
-import { ProfileViewElement } from "./views/profile-view";
 
 const routes: Switch.Route[] = [
   {
+    path: "/app/merchant/:merchantid",
+    view: (params) =>
+      html`<merchant-view merchant-id=${params.merchantid}></merchant-view>`
+  },
+
+  {
     path: "/app/profile/:userid",
-    view: (params: Switch.Params) =>
+    view: (params) =>
       html`<profile-view user-id=${params.userid}></profile-view>`
   },
   {
-    path: "/app/merchant/:id",
-    view: (params: Switch.Params) =>
-      html`<merchant-view merchant-id=${params.id}></merchant-view>`
+    path: "/app/profile/:userid/edit",
+    view: (params) =>
+      html`<profile-edit user-id=${params.userid}></profile-edit>`
   },
-  { path: "/app/about", view: () => html`<about-view></about-view>` },
-  { path: "/app", view: () => html`<home-view></home-view>` },
-  { path: "/", redirect: "/app" }
+
+  {
+    path: "/app/about",
+    view: () => html`<about-view></about-view>`
+  },
+
+  {
+    path: "/app",
+    view: () => html`<home-view></home-view>`
+  },
+
+  {
+    path: "/",
+    redirect: "/app"
+  }
 ];
 
 define({
@@ -37,11 +56,10 @@ define({
       super(routes, "coinbear:history", "coinbear:auth");
     }
   },
-  "mu-store": class CoinbearStore extends Store.Provider<Model, Msg> {
+  "mu-store": class MyStore extends Store.Provider<Model, Msg> {
     constructor() {
-      super(update as any, init, "coinbear:auth");
+      super(update, init, "coinbear:auth");
     }
   },
-  "coinbear-header": CoinbearHeaderElement,
-  "profile-view": ProfileViewElement
+  "mu-form": Form.Element
 });

@@ -1,45 +1,72 @@
-import { Auth } from "@calpoly/mustang";
-import { Msg } from "./message";
-import { Model } from "./model";
-import { Profile } from "server/models";
+import { Auth, ThenUpdate } from "@calpoly/mustang";
+import type {
+  Msg,
+  LoadPayload,
+  SavePayload,
+  LoadedPayload
+} from "./message";
+import type { Model } from "./model";
+import { loadProfile, saveProfile } from "./services/profile-service";
 
 export default function update(
   message: Msg,
   model: Model,
-  user: Auth.User
-): Model | Promise<Model> {
-  switch (message[0]) {
-    case "profile/load": {
-      const { userid } = message[1];
+  _user: Auth.User
+): Model | ThenUpdate<Model, Msg> {
+  const [type, payload, reactions] = message;
 
-      return loadProfile(userid, user).then((profile) => {
-        console.log("update.ts loaded profile:", profile);
-        if (!profile) return model;
-        return {
-          ...model,
-          profile        // <- this is what profile-view reads
-        };
+  switch (type) {
+    case "profile/load": {
+      const { userid } = payload as LoadPayload;
+
+      const loading: Model = {
+        ...model,
+        profileStatus: "loading",
+        profileError: undefined
+      };
+
+      const continuation = loadProfile(userid).then((profile) => {
+        return ["profile/loaded", { profile }, {}] as Msg;
       });
+
+      return [loading, continuation] as ThenUpdate<Model, Msg>;
+    }
+
+    case "profile/loaded": {
+      const { profile } = payload as LoadedPayload;
+
+      return {
+        ...model,
+        profile,
+        profileStatus: "ready",
+        profileError: undefined
+      };
+    }
+
+    case "profile/save": {
+      const { userid, profile } = payload as SavePayload;
+
+      const saving: Model = {
+        ...model,
+        profile,
+        profileStatus: "loading",
+        profileError: undefined
+      };
+
+      const continuation = saveProfile(userid, profile)
+        .then((updated) => {
+          reactions.onSuccess?.();
+          return ["profile/loaded", { profile: updated }, {}] as Msg;
+        })
+        .catch((err: Error) => {
+          reactions.onFailure?.(err);
+          return ["profile/loaded", { profile }, {}] as Msg;
+        });
+
+      return [saving, continuation] as ThenUpdate<Model, Msg>;
     }
 
     default:
-      console.warn("Unhandled message:", message[0]);
       return model;
   }
-}
-
-function loadProfile(
-  userid: string,
-  user: Auth.User
-): Promise<Profile | undefined> {
-  return fetch(`/api/profile/${userid}`, {
-    headers: Auth.headers(user)
-  })
-    .then((res: Response) => (res.ok ? res.json() : undefined))
-    .then((json: unknown) => {
-      if (json) {
-        console.log("loadProfile() response:", json);
-        return json as Profile;
-      }
-    });
 }

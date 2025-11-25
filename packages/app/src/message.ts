@@ -1,8 +1,15 @@
-import type { Profile } from "server/models";
+import type { Profile } from "./model";
+
+export type Reactions = {
+  onSuccess?: () => void;
+  onFailure?: (err: Error) => void;
+};
+
+export type LoadPayload = { userid: string };
+export type SavePayload = { userid: string; profile: Profile };
+export type LoadedPayload = { profile: Profile };
 
 export type Msg =
-  | ["profile/load", { userid: string }]
-  | ["profile/loaded", { profile: Profile }]
-  | ["profile/error", { error: unknown }]
-  
-  ;
+  | ["profile/load", LoadPayload, Reactions]
+  | ["profile/save", SavePayload, Reactions]
+  | ["profile/loaded", LoadedPayload, Reactions];
