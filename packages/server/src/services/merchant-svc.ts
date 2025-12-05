@@ -1,59 +1,26 @@
-import { Schema, model } from "mongoose";
-import { Merchant } from "../models/merchant";
+// packages/server/src/services/merchant-svc.ts
+import { MerchantModel } from "../models/merchant";
 
-const MerchantSchema = new Schema<Merchant>(
-  {
-    id:            { type: String, trim: true, unique: true, sparse: true }, // optional slug
-    name:          { type: String, required: true, trim: true, unique: true },
-    logoSrc:       { type: String, trim: true },
-    websiteHref:   { type: String, trim: true },
-    phone:         { type: String, trim: true },
-    category:      { type: String, trim: true },
-    monthlySpend:  { type: Number },
-    transactions:  { type: Number },
-    lastDate:      { type: Date },   // ISO string will be cast
-    notes:         { type: String }
-  },
-  { collection: "cb_merchants" }
-);
-
-const MerchantModel = model<Merchant>("Merchant", MerchantSchema);
-
-/** List all */
-function index(): Promise<Merchant[]> {
-  return MerchantModel.find().lean();
+export function list(userid: string) {
+  return MerchantModel.find({ userid }).lean();
 }
 
-async function get(key: string): Promise<Merchant | null> {
-  const byId = await MerchantModel.findOne({ id: key }).lean();
-  if (byId) return byId;
-  return MerchantModel.findOne({ name: key }).lean();
+export function get(id: string, userid: string) {
+  return MerchantModel.findOne({ _id: id, userid }).lean();
 }
 
-function create(json: Merchant): Promise<Merchant> {
-  const doc = new MerchantModel(json);
-  return doc.save().then((d) => d.toObject() as Merchant);
+export function create(userid: string, data: any) {
+  return MerchantModel.create({ userid, ...data });
 }
 
-
-function update(id: string, patch: Partial<Merchant>): Promise<Merchant | null> {
+export function update(id: string, userid: string, data: any) {
   return MerchantModel.findOneAndUpdate(
-    { id },
-    { $set: patch },
-    {
-      new: true,           
-      upsert: true,       
-      runValidators: true  
-    }
-  )
-    .lean()
-    .exec();
+    { _id: id, userid },
+    data,
+    { new: true }
+  ).lean();
 }
 
-
-async function remove(id: string): Promise<void> {
-  const deleted = await MerchantModel.findOneAndDelete({ id }).exec();
-  if (!deleted) throw `${id} not deleted`;
+export function remove(id: string, userid: string) {
+  return MerchantModel.findOneAndDelete({ _id: id, userid }).lean();
 }
-
-export default { index, get, create, update, remove };

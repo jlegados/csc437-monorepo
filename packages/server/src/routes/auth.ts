@@ -1,83 +1,71 @@
-import dotenv from "dotenv";
-import express, { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import credentials from "../services/credential-svc";
-
-dotenv.config();
+import express, { Request, Response, NextFunction } from "express";
+import * as CredentialSvc from "../services/credential-svc";
+import * as ProfileSvc from "../services/profile-svc";
 
 const router = express.Router();
-const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 
-// Helper: make a JWT that expires in 1 day
-function generateAccessToken(username: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    jwt.sign(
-      { username },
-      TOKEN_SECRET,
-      { expiresIn: "1d" },
-      (error, token) => {
-        if (error || !token) reject(error ?? new Error("Token error"));
-        else resolve(token as string);
-      }
-    );
-  });
-}
-
-// POST /auth/register
-router.post("/register", async (req: Request, res: Response) => {
-  const { username, password } = req.body ?? {};
-  if (typeof username !== "string" || typeof password !== "string") {
-    return res.status(400).send("Bad request: Invalid input data.");
-  }
-
-  try {
-    const creds = await credentials.create(username, password);
-    const token = await generateAccessToken(creds.username);
-    res.status(201).send({ token });
-  } catch (err: any) {
-    const msg =
-      err?.code === 11000
-        ? `Username exists: ${username}`   // duplicate key from unique index
-        : err?.message ?? "Conflict";
-    res.status(409).send({ error: msg });
-  }
-});
-
-// POST /auth/login
-router.post("/login", async (req: Request, res: Response) => {
-  const { username, password } = req.body ?? {};
-  if (typeof username !== "string" || typeof password !== "string") {
-    return res.status(400).send("Bad request: Invalid input data.");
-  }
-
-  try {
-    const goodUser = await credentials.verify(username, password);
-    const token = await generateAccessToken(goodUser);
-    res.status(200).send({ token });
-  } catch {
-    res.status(401).send("Unauthorized");
-  }
-});
-
-// Middleware: verify Authorization: Bearer <token>
-export function authenticateUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // "Bearer <token>"
-  if (!token) return res.status(401).end();
-
-  jwt.verify(token, TOKEN_SECRET, (error, decoded) => {
-    if (decoded && typeof decoded === "object") {
-      (req as any).user = (decoded as any).username;  // ← attach username
-      next();
-    } else {
-      res.status(403).end();
+function makeUserPayload(userid: string, name: string, email: string) {
+  return {
+    authenticated: true,
+    token: userid,
+    user: {
+      username: userid,
+      name,
+      email
     }
-  });
-  
+  };
 }
 
+// REGISTER
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  const existing = await CredentialSvc.findByUsername(username);
+  if (existing) return res.status(409).json({ error: "User already exists" });
+
+  await CredentialSvc.create({ username, email, password });
+
+  await ProfileSvc.save({
+    userid: username,
+    name: username,
+    email
+  });
+
+  res.json(makeUserPayload(username, username, email));
+});
+
+// LOGIN
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  const cred = await CredentialSvc.findByUsername(username);
+  if (!cred || cred.password !== password)
+    return res.status(401).json({ error: "Invalid credentials" });
+
+  res.json(makeUserPayload(username, username, cred.email ?? ""));
+});
+
+// SESSION
+router.get("/session", authenticateUser, async (req, res) => {
+  const { userid } = res.locals.user;
+
+  const profile = await ProfileSvc.get(userid);
+  if (!profile) return res.status(404).json({ error: "No profile found" });
+
+  res.json(makeUserPayload(userid, profile.name, profile.email));
+});
+
+// AUTH MIDDLEWARE
+function authenticateUser(req: Request, res: Response, next: NextFunction) {
+  const header = req.get("Authorization") || "";
+  const match = header.match(/^Bearer (.+)$/);
+
+  if (!match)
+    return res.status(401).json({ error: "Missing Authorization" });
+
+  res.locals.user = { userid: match[1] };
+  next();
+}
+
+export { authenticateUser };
 export default router;

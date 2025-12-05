@@ -1,58 +1,88 @@
-import express, { Request, Response } from "express";
-import Merchants from "../services/merchant-svc";
+// packages/server/src/routes/merchant-routes.ts
+import express from "express";
+import * as Merchants from "../services/merchant-svc";
 
 const router = express.Router();
 
-/** GET /api/merchants > list */
-router.get("/", async (_req: Request, res: Response) => {
+// GET /api/merchants  — list all merchants for this user
+router.get("/", async (req, res) => {
   try {
-    const list = await Merchants.index();
+    const userid = req.user?.username;
+    if (!userid) return res.status(401).json({ error: "Unauthorized" });
+
+    const list = await Merchants.list(userid);
     res.json(list);
   } catch (err) {
-    res.status(500).send(String(err));
+    console.error("Error listing merchants:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-/** GET /api/merchants/:id > one (by slug/id) */
-router.get("/:id", async (req: Request, res: Response) => {
+// GET /api/merchants/:id  — get single merchant (owned by user)
+router.get("/:id", async (req, res) => {
   try {
-    const doc = await Merchants.get(req.params.id);
-    if (!doc) return res.status(404).send("Not Found");
-    res.json(doc);
+    const userid = req.user?.username;
+    if (!userid) return res.status(401).json({ error: "Unauthorized" });
+
+    const merchant = await Merchants.get(req.params.id, userid);
+    if (!merchant) {
+      return res.status(404).json({ error: "Merchant not found" });
+    }
+
+    res.json(merchant);
   } catch (err) {
-    res.status(404).send(String(err));
+    console.error("Error getting merchant:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-/** POST /api/merchants > create */
-router.post("/", async (req: Request, res: Response) => {
+// POST /api/merchants  — create new merchant
+router.post("/", async (req, res) => {
   try {
-    // const body = req.body as Merchant;
-    const created = await Merchants.create(req.body);
+    const userid = req.user?.username;
+    if (!userid) return res.status(401).json({ error: "Unauthorized" });
+
+    const created = await Merchants.create(userid, req.body);
     res.status(201).json(created);
   } catch (err) {
-    res.status(500).send(String(err));
+    console.error("Error creating merchant:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-/** PUT /api/merchants/:id > update */
-router.put("/:id", async (req: Request, res: Response) => {
+// PUT /api/merchants/:id  — update merchant
+router.put("/:id", async (req, res) => {
   try {
-    const updated = await Merchants.update(req.params.id, req.body);
-    if (!updated) return res.status(404).send("Not Found");
+    const userid = req.user?.username;
+    if (!userid) return res.status(401).json({ error: "Unauthorized" });
+
+    const updated = await Merchants.update(req.params.id, userid, req.body);
+    if (!updated) {
+      return res.status(404).json({ error: "Merchant not found" });
+    }
+
     res.json(updated);
   } catch (err) {
-    res.status(404).send(String(err));
+    console.error("Error updating merchant:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-/** DELETE /api/merchants/:id > remove */
-router.delete("/:id", async (req: Request, res: Response) => {
+// DELETE /api/merchants/:id  — delete merchant
+router.delete("/:id", async (req, res) => {
   try {
-    await Merchants.remove(req.params.id);
-    res.status(204).end();
+    const userid = req.user?.username;
+    if (!userid) return res.status(401).json({ error: "Unauthorized" });
+
+    const deleted = await Merchants.remove(req.params.id, userid);
+    if (!deleted) {
+      return res.status(404).json({ error: "Merchant not found" });
+    }
+
+    res.json({ ok: true });
   } catch (err) {
-    res.status(404).send(String(err));
+    console.error("Error deleting merchant:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

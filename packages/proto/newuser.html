@@ -1,33 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>SignUp</title>
-  <script type="module">
-    import { define, Auth } from "@calpoly/mustang";
-    import { LoginFormElement } from "/src/auth/login-form.ts";
-    define({ "mu-auth": Auth.Provider, "login-form": LoginFormElement });
-  </script>
+  <meta charset="UTF-8" />
+  <title>Create Account</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef0ff, #dde3fb);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 350px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background: #5c3aff;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #4727d8;
+    }
+
+    a {
+      display: block;
+      margin-top: 1rem;
+      color: #5c3aff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="page">
-  <mu-auth>
-    <h2>Create Account</h2>
-    <main class="card">
-      <login-form api="/auth/register" redirect="/">
-        <label>
-          <span>Username:</span>
-          <input name="username" autocomplete="off" />
-        </label>
-        <label>
-          <span>Password:</span>
-          <input type="password" name="password" />
-        </label>
-        <span slot="button">
-          <button type="submit">Create Account</button>
-        </span>
-      </login-form>
-    </main>
-    <p>Already have an account? <a href="login.html">Sign in</a>?</p>
-  </mu-auth>
+
+<body>
+  <div class="card">
+    <h1>Create Account</h1>
+
+    <form id="register-form">
+      <input
+        name="username"
+        placeholder="Username"
+        autocomplete="off"
+        required
+      />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        autocomplete="off"
+        required
+      />
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+
+      <button>Create Account</button>
+    </form>
+
+    <a href="/login.html">Back to login</a>
+  </div>
+
+  <script>
+    const form = document.querySelector("#register-form");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+
+      const res = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        // Expect the server to return { token, userid }
+        localStorage.setItem("token", json.token);
+        localStorage.setItem("username", json.userid);
+        window.location.href = "/app";
+      } else {
+        const err = await res.json().catch(() => ({}));
+        alert(err.error || "Registration failed");
+      }
+    });
+  </script>
 </body>
 </html>

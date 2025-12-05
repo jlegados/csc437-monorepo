@@ -1,15 +1,6 @@
-import type { Profile } from "./model";
+import type { DashboardMsg } from "./components/dashboard/dashboard-message";
+import type { ProfileMsg } from "./components/profile/profile-message";
+import type { MerchantMsg } from "./components/merchant/merchant-message";
 
-export type Reactions = {
-  onSuccess?: () => void;
-  onFailure?: (err: Error) => void;
-};
+export type AppMsg = ProfileMsg | DashboardMsg | MerchantMsg;
 
-export type LoadPayload = { userid: string };
-export type SavePayload = { userid: string; profile: Profile };
-export type LoadedPayload = { profile: Profile };
-
-export type Msg =
-  | ["profile/load", LoadPayload, Reactions]
-  | ["profile/save", SavePayload, Reactions]
-  | ["profile/loaded", LoadedPayload, Reactions];

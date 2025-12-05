@@ -1,34 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef0ff, #dde3fb);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-  <script type="module">
-    import { define, Auth } from "@calpoly/mustang";
-    import "/src/auth/login-form.ts";   
-    define({ "mu-auth": Auth.Provider });
+    .card {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 350px;
+      text-align: center;
+    }
 
-    console.log("login-form defined?", !!customElements.get("login-form"));
-  </script>
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background: #5c3aff;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #4727d8;
+    }
+
+    a {
+      display: block;
+      margin-top: 1rem;
+      color: #5c3aff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="page">
-  <mu-auth>
+
+<body>
+  <div class="card">
     <h1>Login</h1>
 
-    <login-form api="/auth/login" redirect="/index.html">
-      <label>
-        <span>Username:</span>
-        <input name="username" autocomplete="off" />
-      </label>
-      <label>
-        <span>Password:</span>
-        <input type="password" name="password" />
-      </label>
-    </login-form>
-  </mu-auth>
-  <p> Or did you want to 
-    <a href="newuser.html"> sign up as a new user</a>?
-  </p>
+    <form id="login-form">
+      <input name="username" placeholder="Username" autocomplete="off" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button>Login</button>
+    </form>
+
+    <a href="/newuser.html">Create an account</a>
+  </div>
+
+  <script>
+    const form = document.querySelector("#login-form");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      
+      const res = await fetch("/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        localStorage.setItem("token", json.token);
+        localStorage.setItem("username", data.username);
+        window.location.href = "/app";
+      } else {
+        alert("Invalid login");
+      }
+    });
+  </script>
 </body>
 </html>

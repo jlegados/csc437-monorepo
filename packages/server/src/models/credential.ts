@@ -1,5 +1,6 @@
-export interface Credential {
-    username: string;
-    hashedPassword: string;
-  }
-  
+export type Credential = {
+  username: string;
+  email: string;
+  password: string; 
+};
+ 

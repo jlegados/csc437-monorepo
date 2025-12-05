@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CoinBear — SPA</title>
 
+    <!-- Styles -->
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,18 +17,25 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- MUSTANG PROVIDER ORDER (REQUIRED) -->
     <mu-history provides="coinbear:history">
-      <mu-auth provides="coinbear:auth" redirect="/login.html">
-        <mu-store provides="coinbear:model">
+      <mu-auth 
+        provides="coinbear:auth" 
+        src="/auth/session"
+        redirect="/login.html"
+      >
+        <mu-store provides="coinbear:store">
           <article class="page">
             <coinbear-header></coinbear-header>
             <mu-switch></mu-switch>
           </article>
         </mu-store>
       </mu-auth>
-    </mu-history>    
+    </mu-history>
 
+    <!-- ENTRYPOINT -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

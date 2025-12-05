@@ -77,8 +77,9 @@
             Hi, <span id="user-name">traveler</span> ▾
           </button>
           <div id="user-menu-panel" class="menu-panel">
+            <a id="edit-profile" href="/profile.html">Edit Profile</a>
             <a id="logout-item" href="#">Logout</a>
-          </div>
+          </div>                  
         </div>
 
         <label id="theme-toggle" class="row" style="gap:6px;cursor:pointer;align-items:center;margin-left:12px;">
@@ -263,6 +264,13 @@
       );
       window.location.href = "/login.html";
     });
+
+    editItem.addEventListener("click", (e) => {
+    e.preventDefault();
+    const username = nameEl.textContent.replace(",", "").trim();
+    window.location.href = `/profile.html?user=${username}`;
+  });
+
   </script>
 </body>
 </html>

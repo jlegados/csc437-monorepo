@@ -1,19 +1,13 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
+import "../components/dashboard/dashboard-view";
 
 export class HomeViewElement extends LitElement {
-  static styles = css`
-    section {
-      padding: 1.5rem;
-    }
-  `;
+  createRenderRoot() {
+    return this; // use global CSS
+  }
 
   render() {
-    return html`
-      <section>
-        <h1>Home</h1>
-        <p>This is the SPA home view.</p>
-      </section>
-    `;
+    return html`<dashboard-view></dashboard-view>`;
   }
 }
 

@@ -1,6 +1,5 @@
-export interface Profile {
-    username: string;
-    name: string;
-    email: string;
-  }
-  
+export type Profile = {
+  userid: string;   
+  name: string;
+  email: string;
+};

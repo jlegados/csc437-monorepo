@@ -1,73 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Login</title>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef0ff, #dde3fb);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 350px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #5c3aff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
     <h1>Login</h1>
 
     <form id="login-form">
-      <p>
-        <label>
-          Username:
-          <input name="username" autocomplete="off" />
-        </label>
-      </p>
-      <p>
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-      </p>
-      <p>
-        <button type="submit">Login</button>
-      </p>
+      <input name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button>Login</button>
     </form>
 
-    <p>
-      Or did you want to
-      <a href="/newuser.html">sign up as a new user</a>?
-    </p>
+    <a href="/public/newuser.html">Create an account</a>
+  </div>
 
-    <script>
-      const form = document.getElementById("login-form");
-
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const body = {
-          username: data.get("username"),
-          password: data.get("password"),
-        };
-
-        try {
-          const res = await fetch("/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-
-          if (!res.ok) {
-            const msg = await res.text();
-            alert("Login failed: " + msg);
-            return;
-          }
-
-          const { token } = await res.json();
-          // store token for the SPA
-          localStorage.setItem("token", token);
-
-          localStorage.setItem("username", body.username);
-
-          // go to SPA
-          window.location.href = "/app";
-        } catch (err) {
-          console.error("Login error:", err);
-          alert("Login error (see console)");
-        }
+  <script type="module">
+    const form = document.querySelector("#login-form");
+  
+    // Read ?next=/app from query string
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get("next") || "/app";
+  
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      const data = Object.fromEntries(new FormData(form));
+  
+      const res = await fetch("/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
-    </script>
-  </body>
+  
+      const json = await res.json();
+  
+      if (!res.ok) {
+        alert(json.error || "Invalid login");
+        return;
+      }
+  
+      // Save Bearer token
+      localStorage.setItem("token", json.token);
+  
+      // Save username for header fallback
+      localStorage.setItem("username", json.user.username);
+      
+      localStorage.setItem("coinbear.token", json.token);
+      localStorage.setItem("coinbear.userId", json.user.username);
+      // Redirect properly
+      window.location.href = next;
+    });
+  </script>
+  
+</body>
 </html>

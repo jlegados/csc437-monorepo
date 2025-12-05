@@ -1,69 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Sign up</title>
-  </head>
-  <body>
-    <h1>Sign up</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Account</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef0ff, #dde3fb);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 350px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #5c3aff;
+      border: none;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Create Account</h1>
 
     <form id="register-form">
-      <p>
-        <label>
-          Username:
-          <input name="username" autocomplete="off" />
-        </label>
-      </p>
-      <p>
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-      </p>
-      <p>
-        <button type="submit">Create account</button>
-      </p>
+      <input name="username" placeholder="Username" required />
+      <input name="email" placeholder="Email" type="email" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <button>Create Account</button>
     </form>
 
-    <p>
-      Already have an account?
-      <a href="/login.html">Back to login</a>.
-    </p>
+    <a href="/public/login.html">Back to login</a>
+  </div>
 
-    <script>
-      const form = document.getElementById("register-form");
-
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const body = {
-          username: data.get("username"),
-          password: data.get("password"),
-        };
-
-        try {
-          const res = await fetch("/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-
-          if (!res.ok) {
-            const msg = await res.text();
-            alert("Registration failed: " + msg);
-            return;
-          }
-
-          const { token } = await res.json();
-          localStorage.setItem("token", token);
-          localStorage.setItem("username", body.username);
-          window.location.href = "/app";
-        } catch (err) {
-          console.error("Register error:", err);
-          alert("Register error (see console)");
-        }
+  <script type="module">
+    import { Auth } from "https://unpkg.com/@calpoly/mustang/dist/mustang.js";
+  
+    const form = document.querySelector("#register-form");
+  
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+  
+      const res = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
-    </script>
-  </body>
+  
+      const json = await res.json();
+  
+      if (!res.ok) {
+        alert(json.error || "Could not create account");
+        return;
+      }
+  
+      // Save all identity info
+      localStorage.setItem("coinbear.token", json.token);
+      localStorage.setItem("coinbear.userId", json.userid);
+      localStorage.setItem("coinbear.displayName", json.userid);
+  
+      // Mustang Auth requires this shape:
+      Auth.login("coinbear:auth", {
+        authenticated: true,
+        username: json.userid
+      });
+  
+      // Redirect into SPA
+      window.location.href = "/app";
+    });
+  </script>  
+</body>
 </html>
