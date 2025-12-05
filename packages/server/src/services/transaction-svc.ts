@@ -1,8 +1,6 @@
 import { connect, getCollection } from "../mongo";
 import { ObjectId } from "mongodb";
 
-connect("coinbear");
-
 export interface Transaction {
   _id?: string;
   userid: string;
