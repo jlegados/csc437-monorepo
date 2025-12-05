@@ -12,6 +12,8 @@ import merchantRoutes from "./routes/merchants";
 const app = express();
 const port = process.env.PORT || 3000;
 
+connect("coinbear");
+
 const appPublicDir = path.resolve(__dirname, "../../app/public");
 const spaDistDir = path.resolve(__dirname, "../../app/dist");
 
@@ -38,14 +40,10 @@ app.use("/app", async (_req: Request, res: Response) => {
   res.send(html);
 });
 
-async function start() {
-  await connect("coinbear"); // ⬅ FIXED: now awaited
-
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
     console.log(`Serving login/newuser from: ${appPublicDir}`);
     console.log(`Serving SPA from:           ${spaDistDir}`);
   });
-}
 
-start();
+
