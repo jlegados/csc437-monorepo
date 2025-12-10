@@ -1,5 +1,3 @@
-// packages/server/src/routes/dashboard.ts
-
 import express from "express";
 import Dashboard from "../services/dashboard-service";
 
@@ -22,7 +20,7 @@ router.get("/:userid", async (req, res, next) => {
 router.post("/:userid/transactions", async (req, res, next) => {
   try {
     const { userid } = req.params;
-    const data = req.body; // should match TransactionInput shape
+    const data = req.body; 
 
     const dashboard = await Dashboard.addTransaction(userid, data);
 

@@ -1,5 +1,3 @@
-// packages/server/src/services/dashboard-service.ts
-
 import DashboardModel from "../models/dashboard";
 
 export type TransactionInput = {

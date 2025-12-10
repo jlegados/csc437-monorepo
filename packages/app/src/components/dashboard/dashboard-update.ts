@@ -1,5 +1,3 @@
-// packages/app/src/components/dashboard/dashboard-update.ts
-
 import type { Model } from "../../model";
 import type { DashboardMsg } from "./dashboard-message";
 import type { Dashboard } from "./dashboard-model";

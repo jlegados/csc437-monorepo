@@ -50,13 +50,12 @@
       <button>Login</button>
     </form>
 
-    <a href="/public/newuser.html">Create an account</a>
+    <a href="/newuser.html">Create an account</a>
   </div>
 
   <script type="module">
     const form = document.querySelector("#login-form");
   
-    // Read ?next=/app from query string
     const params = new URLSearchParams(window.location.search);
     const next = params.get("next") || "/app";
   
@@ -78,15 +77,12 @@
         return;
       }
   
-      // Save Bearer token
       localStorage.setItem("token", json.token);
   
-      // Save username for header fallback
       localStorage.setItem("username", json.user.username);
       
       localStorage.setItem("coinbear.token", json.token);
       localStorage.setItem("coinbear.userId", json.user.username);
-      // Redirect properly
       window.location.href = next;
     });
   </script>

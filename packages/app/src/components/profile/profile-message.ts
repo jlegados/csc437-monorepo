@@ -1,4 +1,3 @@
-// src/components/profile/profile-message.ts
 import type { Profile } from "../../model";
 
 export type LoadPayload = { userid: string };

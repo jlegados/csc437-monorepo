@@ -1,5 +1,3 @@
-// src/components/profile/profile-service.ts
-
 import type { Profile } from "./profile-model";
 
 const BASE_URL = "/api/profile";

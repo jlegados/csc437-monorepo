@@ -19,10 +19,8 @@ export class MerchantListElement extends LitElement {
   loading = false;
   error: string | null = null;
 
-  // the *actual* logged-in user from Auth.Model.user
   authUser?: Auth.User;
 
-  // (optional) use light DOM so your page.css works
   createRenderRoot() {
     return this;
   }
@@ -32,15 +30,13 @@ export class MerchantListElement extends LitElement {
 
     console.log("[merchant-list] connected");
 
-    // 👇 IMPORTANT: observe Auth.Model, not Auth.User
     const authObserver = new Observer<Auth.Model>(this, "coinbear:auth");
 
     authObserver.observe((auth) => {
         console.log("[merchant-list] auth changed:", auth);
       
-        // auth.user might be undefined until auth loads fully
         if (!auth || !auth.user) {
-          return; // WAIT — don't error yet!
+          return; 
         }
       
         this.authUser = auth.user;
@@ -63,11 +59,8 @@ export class MerchantListElement extends LitElement {
     this.error = null;
 
     try {
-      // ✅ send Authorization: Bearer <token>
       const headers = Auth.headers(this.authUser);
 
-      // use whatever your server route is:
-      // if your server uses app.use("/api/merchant", ...) then keep "/api/merchant"
       const response = await fetch("/api/merchant", { headers });
 
       if (!response.ok) {

@@ -1,4 +1,3 @@
-// src/components/profile/profile-update.ts
 import type { Model } from "../../model";
 import type { ProfileMsg } from "./profile-message";
 

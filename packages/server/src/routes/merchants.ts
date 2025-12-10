@@ -1,4 +1,3 @@
-// packages/server/src/routes/merchant-routes.ts
 import express from "express";
 import * as Merchants from "../services/merchant-svc";
 

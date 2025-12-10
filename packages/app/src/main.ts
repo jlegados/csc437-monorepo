@@ -1,7 +1,6 @@
 import { Auth, History, Switch, Store, define } from "@calpoly/mustang";
 import { html } from "lit";
 
-// ------------ COMPONENT IMPORTS ------------
 import "./components/coinbear-header";
 import "./components/dashboard/dashboard-view";
 import "./components/transactions/transaction-add";
@@ -14,6 +13,7 @@ import "./views/merchant-list";
 import "./views/merchant-view";
 import "./views/home-view";
 import "./views/about-view";
+import "./views/transactions-view"
 
 import { ProfileViewElement } from "./components/profile/profile-view";
 import { ProfileEditElement } from "./components/profile/profile-edit";
@@ -61,7 +61,6 @@ const routes = [
     view: () => html`<merchant-add></merchant-add>`
   },
 
-  // Merchant main view paths
   {
     path: "/app/merchant",
     view: () => html`<merchant-list></merchant-list>`
@@ -81,6 +80,10 @@ const routes = [
     view: () => html`<about-view></about-view>`
   },
   {
+    path: "/app/transactions",
+    view: () => html`<transactions-view></transactions-view>`
+  },  
+  {
     path: "/app",
     view: () => html`<dashboard-view></dashboard-view>`
   },
@@ -90,9 +93,7 @@ const routes = [
   }
 ];
 
-// ----------------------------------------------------
-//  DEFINE CUSTOM ELEMENTS + MUSTANG PROVIDERS
-// ----------------------------------------------------
+
 define({
   "mu-history": History.Provider,
   "mu-auth": Auth.Provider,

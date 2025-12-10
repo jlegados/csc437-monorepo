@@ -3,7 +3,7 @@ import "../components/dashboard/dashboard-view";
 
 export class HomeViewElement extends LitElement {
   createRenderRoot() {
-    return this; // use global CSS
+    return this;
   }
 
   render() {
